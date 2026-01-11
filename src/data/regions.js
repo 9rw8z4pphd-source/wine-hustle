@@ -3,102 +3,120 @@ export const REGIONS_DATA = [
   {
     id: "italy",
     name: "Italy",
-    description: "The world's most diverse wine landscape.",
+    description: "Complex laws based on tradition and terroir.",
     subRegions: [
       { 
         name: "Tuscany", 
-        methods: "Sangiovese focus on Galestro (schist) and Alberese (limestone) soils.", 
+        methods: "Focus on Sangiovese and aging classifications.", 
         wines: [
           { 
-            name: "The Chianti Family", 
+            name: "Chianti Family", 
             grape: "Sangiovese", 
-            pro: "Quality increases with aging and stricter zones. Classico is the historic heart.",
-            food: ["Pizza", "Bolognese", "Bistecca"],
-            subTypes: ["Chianti DOCG", "Chianti Classico", "Chianti Classico Riserva", "Gran Selezione"]
+            pro: "The most famous Italian red. Quality is strictly regulated by zone and time in oak.",
+            food: ["Pizza", "Steak", "Tomato Pasta"],
+            hierarchyTitle: "The Quality Pyramid",
+            subTypes: [
+              { level: "Chianti DOCG", rule: "Standard version. Fruit-forward, light, drink now." },
+              { level: "Chianti Classico", rule: "The 'Black Rooster' zone. Higher altitude, more mineral and structure." },
+              { level: "Classico Riserva", rule: "Aged 24 months. More oak influence, tobacco, and spice notes." },
+              { level: "Gran Selezione", rule: "Highest tier. Estate-grown fruit only. Maximum concentration." }
+            ]
           },
           { 
             name: "Brunello di Montalcino", 
             grape: "Sangiovese Grosso", 
-            pro: "100% Sangiovese. A powerhouse requiring 5 years of aging. Masculine and earthy.", 
-            food: ["Wild Boar", "Roasted Lamb"],
-            subTypes: ["Rosso di Montalcino", "Brunello", "Brunello Riserva"]
-          },
-          { name: "Bolgheri", grape: "Cabernet Blend", pro: "The 'Super Tuscans'. International style, polished and expensive.", food: ["Ribeye Steak"] }
+            pro: "One of Italy's 'Big B' wines. Requires massive aging.",
+            food: ["Lamb", "Game"],
+            subTypes: [
+              { level: "Rosso di Montalcino", rule: "The 'Baby Brunello'. Fresher, younger, and cheaper." },
+              { level: "Brunello DOCG", rule: "Required 5 years aging (2 in oak). Powerful and earthy." }
+            ]
+          }
         ] 
       },
-      { 
-        name: "Piedmont", 
-        methods: "Traditional long maceration in neutral 'Botte' oak. High-altitude Alpine air.", 
+      {
+        name: "Piedmont",
+        methods: "Nebbiolo specialists.",
         wines: [
-          { name: "Barolo", grape: "Nebbiolo", pro: "The King. Masculine, high tannin/acid. Needs age and air.", food: ["Truffle", "Ribeye"], subTypes: ["Barolo", "Barolo Riserva", "Single Vineyard (Cru)"] },
-          { name: "Barbaresco", grape: "Nebbiolo", pro: "The Queen. More elegant and approachable than Barolo.", food: ["Duck", "Mushroom"] },
-          { name: "Gavi", grape: "Cortese", pro: "Italy's Chablis. Bone-dry, lime, and mineral.", food: ["Seafood", "Branzino"] },
-          { name: "Barbera d'Asti", grape: "Barbera", pro: "High acid, low tannin. The ultimate food-friendly red.", food: ["Salami", "Pizza"] }
-        ] 
-      },
-      { 
-        name: "Veneto", 
-        methods: "Appassimento (drying grapes) and the Prosecco Charmat method.", 
-        wines: [
-          { name: "Amarone", grape: "Corvina Blend", pro: "Dried grapes. Intense, 15%+ alc, raisinated fruit.", food: ["Blue Cheese", "Venison"] },
-          { name: "Valpolicella Ripasso", grape: "Corvina Blend", pro: "Re-fermented on Amarone skins for richness.", food: ["Osso Buco"] },
-          { name: "Prosecco", grape: "Glera", pro: "Fresh bubbles. Look for 'Superiore' from hilly Valdobbiadene.", food: ["Aperitivo"], subTypes: ["DOC", "DOCG Superiore", "Cartizze"] }
-        ] 
-      },
-      { name: "Sicily", methods: "Volcanic soils from Mt. Etna.", wines: [{ name: "Etna Rosso", grape: "Nerello Mascalese", pro: "Smoky, light, and mineral.", food: ["Grilled Tuna"] }] },
-      { name: "Puglia", methods: "Intense sun.", wines: [{ name: "Primitivo", grape: "Primitivo", pro: "Bold, jammy, and smooth.", food: ["BBQ"] }] },
-      { name: "Alto Adige", methods: "Alpine slopes.", wines: [{ name: "Pinot Grigio", grape: "Pinot Grigio", pro: "Zesty, mineral, and clean.", food: ["Salad"] }] }
+          { 
+            name: "Barolo", 
+            grape: "Nebbiolo", 
+            pro: "The King of Wines. High tannin/acid. Needs age.",
+            food: ["Truffle", "Red Meat"],
+            subTypes: [
+              { level: "Barolo DOCG", rule: "Standard blend of vineyards." },
+              { level: "Barolo 'Cru'", rule: "Single vineyard (e.g., Cannubi) showing specific terroir." },
+              { level: "Barolo Riserva", rule: "Aged for 5+ years before release." }
+            ]
+          }
+        ]
+      }
     ]
   },
   {
     id: "france",
     name: "France",
-    description: "The global gold standard for terroir and hierarchy.",
+    description: "Benchmark for global wine standards.",
     subRegions: [
       { 
         name: "Burgundy", 
-        methods: "Hierarchy based on specific vineyard plots (Climats).", 
+        methods: "Soil-based hierarchy (Climats).", 
         wines: [
-          { name: "Côte d'Or Reds", grape: "Pinot Noir", pro: "The world's most elegant Pinot. Earthy and silky.", food: ["Duck"], subTypes: ["Regional", "Village", "1er Cru", "Grand Cru"] },
-          { name: "Chablis", grape: "Chardonnay", pro: "Unoaked, saline, and sharp.", food: ["Oysters"], subTypes: ["Petit Chablis", "Chablis", "1er Cru", "Grand Cru"] }
+          { 
+            name: "Burgundy Reds/Whites", 
+            grape: "Pinot Noir / Chardonnay", 
+            pro: "The closer the wine gets to a single plot of land, the more expensive it becomes.",
+            food: ["Duck", "Creamy Fish"],
+            hierarchyTitle: "The Soil Tiers",
+            subTypes: [
+              { level: "Regional", rule: "Grapes from anywhere in Burgundy. Basic fruit." },
+              { level: "Village", rule: "Grapes from a specific town (e.g., Meursault)." },
+              { level: "Premier Cru", rule: "High-quality specific hillsides. Notable elegance." },
+              { level: "Grand Cru", rule: "The top 1%. Best sun exposure. Massive power and complexity." }
+            ]
+          }
         ] 
       },
-      { 
-        name: "Bordeaux", 
-        methods: "Left Bank (Cabernet/Gravel) vs Right Bank (Merlot/Clay).", 
+      {
+        name: "Champagne",
+        methods: "Method Traditionnelle (bubbles in bottle).",
         wines: [
-          { name: "Left Bank (Médoc)", grape: "Cabernet Blend", pro: "Structured, cedar, and blackcurrant.", food: ["Lamb"], subTypes: ["Pauillac", "Margaux", "St-Julien"] },
-          { name: "Right Bank (St-Emilion)", grape: "Merlot Blend", pro: "Velvety, plum, and chocolate.", food: ["Roast Beef"] }
-        ] 
-      },
-      { name: "Champagne", methods: "Méthode Traditionnelle.", wines: [{ name: "Champagne", grape: "Blend", pro: "Brioche and citrus bubbles.", food: ["Fried Chicken"], subTypes: ["Non-Vintage", "Vintage", "Blanc de Blancs"] }] }
-    ]
-  },
-  {
-    id: "germany",
-    name: "Germany",
-    description: "Precision, acidity, and slate soils.",
-    subRegions: [
-      { 
-        name: "Mosel", 
-        methods: "Blue slate soil. Classification by ripeness (Pradikat).", 
-        wines: [
-          { name: "Riesling", grape: "Riesling", pro: "The ultimate balance of sugar and laser-sharp acid.", food: ["Thai"], subTypes: ["Trocken (Dry)", "Kabinett", "Spätlese", "Auslese"] }
-        ] 
+          {
+            name: "Champagne Tiers",
+            grape: "Chardonnay/Pinot Noir",
+            pro: "Aging on 'lees' (yeast) creates the toasted brioche flavor.",
+            food: ["Oysters", "Fried Foods"],
+            subTypes: [
+              { level: "Non-Vintage (NV)", rule: "Consistency. A blend of multiple years." },
+              { level: "Vintage", rule: "Exceptional years only. Aged longer for more toastiness." },
+              { level: "Prestige Cuvée", rule: "The House's best (e.g., Dom Perignon)." }
+            ]
+          }
+        ]
       }
     ]
   },
   {
     id: "spain",
     name: "Spain",
-    description: "Mastery of American Oak aging.",
+    description: "Aging determined by time in oak barrels.",
     subRegions: [
-      { 
-        name: "Rioja", 
-        methods: "Oak aging determines the label.", 
+      {
+        name: "Rioja",
+        methods: "Tempranillo aged in American/French oak.",
         wines: [
-          { name: "Tempranillo", grape: "Tempranillo", pro: "Vanilla, tobacco, and dill notes from oak.", food: ["Lamb"], subTypes: ["Crianza", "Reserva", "Gran Reserva"] }
-        ] 
+          {
+            name: "Rioja Aging Tiers",
+            grape: "Tempranillo",
+            pro: "The label color tells you how long the wine stayed in the cellar.",
+            food: ["Lamb", "Tapas"],
+            subTypes: [
+              { level: "Crianza", rule: "1 year in oak. Fresh fruit with a hint of vanilla." },
+              { level: "Reserva", rule: "3 years aging (1 in oak). Smooth, tobacco, and leather notes." },
+              { level: "Gran Reserva", rule: "5 years aging (2 in oak). Developed, silky, and complex." }
+            ]
+          }
+        ]
       }
     ]
   }
