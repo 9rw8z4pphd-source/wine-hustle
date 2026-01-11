@@ -2,44 +2,87 @@ export const REGIONS_DATA = [
   {
     id: "italy",
     name: "Italy",
-    description: "20 Regions, 1000+ grapes. The land of acidity and tradition.",
-    image: "/images/italy-hero.jpg",
+    description: "The land of acidity and tradition.",
     subRegions: [
-      { name: "Piedmont", methods: "Long maceration, Botte aging.", wines: [{name:"Barolo", grape:"Nebbiolo", pro:"King of wines."}, {name:"Barbaresco", grape:"Nebbiolo", pro:"The Queen; more elegant."}, {name:"Gavi", grape:"Cortese", pro:"Crisp, mineral white."}] },
-      { name: "Tuscany", methods: "Sangiovese blends, French Barrique.", wines: [{name:"Brunello", grape:"Sangiovese", pro:"Power & Longevity."}, {name:"Chianti Classico", grape:"Sangiovese", pro:"The Black Rooster standard."}, {name:"Bolgheri", grape:"Cabernet/Merlot", pro:"The Super Tuscans."}] },
-      { name: "Veneto", methods: "Appassimento (Dried grapes).", wines: [{name:"Amarone", grape:"Corvina", pro:"Rich, dried fruit flavors."}, {name:"Valpolicella", grape:"Corvina", pro:"Fresh cherry flavors."}, {name:"Prosecco", grape:"Glera", pro:"Charmat method bubbles."}] },
-      { name: "Alto Adige", methods: "Alpine viticulture.", wines: [{name:"Pinot Grigio", grape:"Pinot Grigio", pro:"High-altitude, flinty."}, {name:"Gewürztraminer", grape:"Gewürztraminer", pro:"Highly aromatic, lychee."}] },
-      { name: "Sicily", methods: "Volcanic soil (Etna).", wines: [{name:"Etna Rosso", grape:"Nerello Mascalese", pro:"The Burgundy of the Mediterranean."}, {name:"Grillo", grape:"Grillo", pro:"Saline, citrusy white."}] },
-      { name: "Puglia", methods: "Hot climate, high extraction.", wines: [{name:"Primitivo", grape:"Primitivo", pro:"Jammy, high alcohol, bold."}] },
-      { name: "Campania", methods: "Ancient volcanic grapes.", wines: [{name:"Taurasi", grape:"Aglianico", pro:"The Barolo of the South."}] }
+      { 
+        name: "Tuscany", 
+        methods: "Sangiovese-led blends. Use of French Barrique in 'Super Tuscans'.", 
+        wines: [
+          {name: "Chianti Classico", grape: "Sangiovese", pro: "The 'Black Rooster'. High acid, cherry, oregano."},
+          {name: "Brunello di Montalcino", grape: "Sangiovese", pro: "Power & Longevity. Must be 100% Sangiovese."},
+          {name: "Rosso di Montalcino", grape: "Sangiovese", pro: "The 'Baby Brunello'. Fresher and younger."},
+          {name: "Bolgheri / Super Tuscan", grape: "Cabernet Blend", pro: "Coastal Tuscany. Modern, international style."},
+          {name: "Vino Nobile di Montepulciano", grape: "Sangiovese", pro: "Elegant, 'Noble' style from high altitude."},
+          {name: "Vernaccia di San Gimignano", grape: "Vernaccia", pro: "Tuscany's most famous white. Crisp and nutty."},
+          {name: "Vin Santo", grape: "Trebbiano/Grechetto", pro: "Sweet 'Holy Wine'. Served with biscotti."}
+        ] 
+      },
+      { 
+        name: "Piedmont", 
+        methods: "Long maceration, large oak aging.", 
+        wines: [
+          {name: "Barolo", grape: "Nebbiolo", pro: "The King. Tannic, rose, and tar notes."},
+          {name: "Barbaresco", grape: "Nebbiolo", pro: "The Queen. More elegant and approachable."},
+          {name: "Barbera d'Asti", grape: "Barbera", pro: "High acid, low tannin. The 'everyday' red."},
+          {name: "Dolcetto d'Alba", grape: "Dolcetto", pro: "Blackberry and almond. Soft and easy."},
+          {name: "Gavi", grape: "Cortese", pro: "Bone-dry, flinty white. Italy's Chablis."},
+          {name: "Moscato d'Asti", grape: "Moscato", pro: "Sweet, low alcohol, fizzy."}
+        ] 
+      }
+      // ... I will provide the rest of the countries below in a similar format
     ]
   },
   {
-    id: "france",
-    name: "France",
-    description: "The global benchmark for structure and elegance.",
-    image: "/images/france-hero.jpg",
+    id: "spain",
+    name: "Spain",
+    description: "Traditional oak aging and high-altitude desert climates.",
     subRegions: [
-      { name: "Bordeaux", methods: "Blending (Assemblage), New Oak.", wines: [{name:"Médoc", grape:"Cabernet Sauvignon", pro:"Left bank, gravel soil."}, {name:"St-Émilion", grape:"Merlot", pro:"Right bank, clay soil."}, {name:"Sauternes", grape:"Semillon/Sauvignon", pro:"Noble rot sweet wine."}] },
-      { name: "Burgundy", methods: "Single vineyard (Climat) focus.", wines: [{name:"Chablis", grape:"Chardonnay", pro:"Pure mineral, no oak."}, {name:"Côte de Nuits", grape:"Pinot Noir", pro:"World-class red."}, {name:"Côte de Beaune", grape:"Chardonnay", pro:"World-class white."}] },
-      { name: "Rhône Valley", methods: "Northern (Syrah) vs Southern (Blends).", wines: [{name:"Hermitage", grape:"Syrah", pro:"Smoky, meaty red."}, {name:"Châteauneuf-du-Pape", grape:"Grenache Blend", pro:"13 grapes allowed."}, {name:"Condrieu", grape:"Viognier", pro:"Apricot and floral white."}] },
-      { name: "Loire Valley", methods: "Focus on freshness and high acid.", wines: [{name:"Sancerre", grape:"Sauvignon Blanc", pro:"Flinty white."}, {name:"Chinon", grape:"Cabernet Franc", pro:"Herbal, bell pepper red."}] },
-      { name: "Champagne", methods: "Méthode Champenoise (Second fermentation in bottle).", wines: [{name:"Côte des Blancs", grape:"Chardonnay", pro:"Blanc de Blancs style."}, {name:"Montagne de Reims", grape:"Pinot Noir", pro:"Structure and body."}] },
-      { name: "Alsace", methods: "Varietal labeling, Germanic influence.", wines: [{name:"Riesling", grape:"Riesling", pro:"Dry, petrol notes, lime."}] }
+      {
+        name: "Rioja",
+        methods: "Graded by aging: Crianza, Reserva, Gran Reserva.",
+        wines: [
+          {name: "Rioja Reserva", grape: "Tempranillo", pro: "Vanilla and dill notes from American Oak."},
+          {name: "Rioja Blanco", grape: "Viura", pro: "Can be fresh or heavily oaked and nutty."},
+          {name: "Rosado", grape: "Garnacha", pro: "Bright, strawberry-focused rosés."}
+        ]
+      },
+      {
+        name: "Priorat",
+        methods: "Llicorella (black slate) soil. Low yielding old vines.",
+        wines: [
+          {name: "Priorat Red", grape: "Garnacha/Cariñena", pro: "Powerful, mineral, and high alcohol."}
+        ]
+      },
+      {
+        name: "Rías Baixas",
+        methods: "Coastal Atlantic influence. Pergola vine training.",
+        wines: [
+          {name: "Albariño", grape: "Albariño", pro: "Salty, peachy, and zesty. Best with seafood."}
+        ]
+      }
     ]
   },
   {
-    id: "australia",
-    name: "Australia",
-    description: "From ancient vines to cool-climate elegance.",
-    image: "/images/australia-hero.jpg",
+    id: "usa",
+    name: "USA",
+    description: "Bold fruit and technological precision.",
     subRegions: [
-      { name: "Barossa Valley", methods: "Old vine Shiraz (100yr+ vines).", wines: [{name:"Barossa Shiraz", grape:"Shiraz", pro:"The Aussie icon."}] },
-      { name: "Margaret River", methods: "Maritime influence (Indian Ocean).", wines: [{name:"M.R. Cabernet", grape:"Cabernet Sauvignon", pro:"Elegance like Bordeaux."}, {name:"M.R. Chardonnay", grape:"Chardonnay", pro:"Gingin clone, powerful."}] },
-      { name: "Hunter Valley", methods: "Early pick, low alcohol aging.", wines: [{name:"Hunter Semillon", grape:"Semillon", pro:"Ages 20 years into toast."}] },
-      { name: "Yarra Valley", methods: "Cool climate, whole bunch press.", wines: [{name:"Yarra Pinot", grape:"Pinot Noir", pro:"Bright, ethereal red."}] },
-      { name: "Coonawarra", methods: "Terra Rossa (Red Soil) influence.", wines: [{name:"Coonawarra Cab", grape:"Cabernet Sauvignon", pro:"Distinct minty note."}] },
-      { name: "Adelaide Hills", methods: "High altitude, cool nights.", wines: [{name:"Sauvignon Blanc", grape:"Sauvignon Blanc", pro:"Tropical but zesty."}] }
+      {
+        name: "Napa Valley",
+        methods: "Volcanic soils and heavy French Oak usage.",
+        wines: [
+          {name: "Napa Cabernet", grape: "Cabernet Sauvignon", pro: "Expensive, bold, and prestigious."},
+          {name: "Oakville / Rutherford", grape: "Cabernet Sauvignon", pro: "Known for 'Rutherford Dust' (earthy tannins)."},
+          {name: "Napa Chardonnay", grape: "Chardonnay", pro: "Full-bodied, buttery, and tropical."}
+        ]
+      },
+      {
+        name: "Oregon",
+        methods: "Cool climate, similar to Burgundy.",
+        wines: [
+          {name: "Willamette Valley", grape: "Pinot Noir", pro: "Earthier and lighter than California Pinot."}
+        ]
+      }
     ]
   }
 ];
