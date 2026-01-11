@@ -2,123 +2,103 @@ export const REGIONS_DATA = [
   {
     id: "italy",
     name: "Italy",
-    description: "The most complex wine nation on earth.",
+    description: "The world's largest producer by volume and variety.",
     subRegions: [
-      { 
-        name: "Tuscany", 
-        methods: "Sangiovese focus. Terroir varies from coastal sands to inland limestone.", 
-        wines: [
-          { 
-            name: "Chianti Family", grape: "Sangiovese", 
-            pro: "Iconic acid and cherry. The Black Rooster (Classico) is the heart.",
-            subTypes: [
-              { level: "Chianti DOCG", rule: "Fresh, simple, stainless steel aged." },
-              { level: "Classico", rule: "Historic zone. More mineral and elegance." },
-              { level: "Classico Riserva", rule: "24 mo aging. Spice and tobacco notes." },
-              { level: "Gran Selezione", rule: "30 mo aging. Single estate fruit only." }
-            ],
-            food: ["Pasta", "Pizza"]
-          },
-          { 
-            name: "Brunello di Montalcino", grape: "Sangiovese Grosso", 
-            pro: "Power, depth, and 5 years of required aging.",
-            subTypes: [
-              { level: "Rosso di Montalcino", rule: "Fresh, 1-year aged 'Baby Brunello'." },
-              { level: "Brunello DOCG", rule: "The legend. 2 years oak, 5 total." },
-              { level: "Brunello Riserva", rule: "6 years aging. Massive complexity." }
-            ],
-            food: ["Lamb", "Wild Boar"]
-          },
-          { name: "Vino Nobile di Montepulciano", grape: "Prugnolo Gentile", pro: "The 'Noble' wine. More floral than Brunello.", food: ["Roast Pork"] },
-          { name: "Bolgheri / Super Tuscan", grape: "Bordeaux Blend", pro: "Coastal power. Polished, oaky, and prestigious.", food: ["Ribeye"] },
-          { name: "Vernaccia di San Gimignano", grape: "Vernaccia", pro: "Tuscany's great white. Crisp and almond-toned.", food: ["White Fish"] }
-        ] 
-      },
-      { 
-        name: "Piedmont", methods: "Alpine cooling meets the 'Botte' (large oak) tradition.", 
-        wines: [
-          { name: "Barolo", grape: "Nebbiolo", pro: "King of wines. Rose, tar, and high tannin.", subTypes: [{level: "Commune", rule: "e.g. La Morra (soft) vs Serralunga (power)"}, {level: "Riserva", rule: "5+ years aging"}], food: ["Truffle"] },
-          { name: "Barbaresco", grape: "Nebbiolo", pro: "Queen of wines. Softer tannins, more floral.", food: ["Duck"] },
-          { name: "Barbera d'Asti", grape: "Barbera", pro: "The everyday red. High acid, no tannin. Juicy.", food: ["Salumi"] },
-          { name: "Dolcetto d'Alba", grape: "Dolcetto", pro: "Easy-drinking, dark fruit, and bitter almond finish.", food: ["Pasta"] },
-          { name: "Gavi", grape: "Cortese", pro: "Bone-dry, lime, and flinty minerality.", food: ["Seafood"] },
-          { name: "Roero Arneis", grape: "Arneis", pro: "Peach, apricot, and medium body white.", food: ["Chicken"] }
-        ] 
-      },
-      { 
-        name: "Veneto", methods: "Home of the drying room (Fruttaio) and the bubble.", 
-        wines: [
-          { name: "Amarone", grape: "Corvina Blend", pro: "Intense, raisinated fruit, and 15% alcohol.", food: ["Blue Cheese"] },
-          { name: "Valpolicella Ripasso", grape: "Corvina", pro: "The bridge between fresh and intense.", food: ["Beef Stew"] },
-          { name: "Soave Classico", grape: "Garganega", pro: "Volcanic white. Lemon and saline notes.", food: ["Risotto"] },
-          { name: "Prosecco Superiore", grape: "Glera", pro: "The hilly DOCG quality tier.", food: ["Aperitivo"] },
-          { name: "Bardolino", grape: "Corvina", pro: "Light, chilled red. Perfect for summer.", food: ["Fish"] }
-        ] 
-      },
-      { name: "Sicily", methods: "Volcanic Etna vs the hot plains.", wines: [{ name: "Etna Rosso", grape: "Nerello", pro: "The Mediterranean Burgundy." }, { name: "Nero d'Avola", grape: "Nero d'Avola", pro: "Dark, plummy, and sun-drenched." }, { name: "Grillo", grape: "Grillo", pro: "Zesty coastal white." }] }
+      { id: "piedmont", name: "Piedmont", methods: "Home of Nebbiolo and Alpine fog." },
+      { id: "tuscany", name: "Tuscany", methods: "The heart of Sangiovese and rolling hills." },
+      { id: "veneto", name: "Veneto", methods: "Famous for Amarone and Prosecco hills." },
+      { id: "sicily", name: "Sicily", methods: "Volcanic soils and coastal breezes." },
+      { id: "puglia", name: "Puglia", methods: "The sun-drenched 'heel' of Italy." },
+      { id: "alto_adige", name: "Alto Adige", methods: "High-altitude, cool-climate precision." },
+      { id: "emilia_romagna", name: "Emilia-Romagna", methods: "Italy's food capital; Lambrusco territory." },
+      { id: "abruzzo", name: "Abruzzo", methods: "Wild, mountainous, and sea-influenced." },
+      { id: "lombardy", name: "Lombardy", methods: "Specializing in Metodo Classico (Franciacorta)." },
+      { id: "campania", name: "Campania", methods: "Ancient volcanic grapes like Aglianico." }
     ]
   },
   {
     id: "france",
     name: "France",
-    description: "The birthplace of 'Terroir' and the Appellation system.",
+    description: "The architect of the modern wine world.",
     subRegions: [
-      { 
-        name: "Burgundy", methods: "Mosaic of soil. Hierarchy is based on precise vineyard plots.", 
-        wines: [
-          { name: "Côte de Nuits (Red)", grape: "Pinot Noir", pro: "Earth, mushroom, and red fruit. The pinnacle of Pinot.", subTypes: [{level: "Village", rule: "e.g. Gevrey-Chambertin"}, {level: "Grand Cru", rule: "The Top 1%"}], food: ["Coq au Vin"] },
-          { name: "Côte de Beaune (White)", grape: "Chardonnay", pro: "Butter, hazelnut, and citrus complexity.", food: ["Lobster"] },
-          { name: "Chablis", grape: "Chardonnay", pro: "Unoaked 'Oyster-shell' minerality.", subTypes: [{level: "1er Cru", rule: "Classic stone fruit"}, {level: "Grand Cru", rule: "Richness and age"}], food: ["Oysters"] },
-          { name: "Beaujolais", grape: "Gamay", pro: "Light, fruity, and low tannin. Drink slightly chilled.", food: ["Charcuterie"] },
-          { name: "Mâconnais", grape: "Chardonnay", pro: "Affordable, sunny, and approachable white Burgundy.", food: ["Salads"] }
-        ] 
-      },
-      { 
-        name: "Bordeaux", methods: "The battle of the Banks. Left (Gravel) vs Right (Clay).", 
-        wines: [
-          { name: "Pauillac", grape: "Cabernet", pro: "The icon of the Left Bank. Pencil lead and cedar.", food: ["Lamb"] },
-          { name: "Saint-Émilion", grape: "Merlot", pro: "The plush heart of the Right Bank. Plum and chocolate.", food: ["Roast Beef"] },
-          { name: "Sauternes", grape: "Sémillon/Sauvignon", pro: "Noble Rot dessert wine. Honey and apricot.", food: ["Foie Gras"] },
-          { name: "Pessac-Léognan", grape: "Sauvignon/Sémillon", pro: "The world's greatest dry oaked whites.", food: ["Scallops"] },
-          { name: "Margaux", grape: "Cabernet", pro: "The most floral and elegant of the Medoc.", food: ["Duck"] }
-        ] 
-      },
-      { name: "Rhône Valley", methods: "Northern Granite vs Southern Stones.", wines: [{ name: "Hermitage", grape: "Syrah", pro: "Smoky, meaty, and powerful." }, { name: "Châteauneuf-du-Pape", grape: "Grenache Blend", pro: "Rich, spicy, and warm." }, { name: "Condrieu", grape: "Viognier", pro: "Explosive apricot and honeysuckle white." }] }
+      { id: "bordeaux", name: "Bordeaux", methods: "Left Bank gravel vs Right Bank clay." },
+      { id: "burgundy", name: "Burgundy", methods: "Micro-terroir and soil-based hierarchy." },
+      { id: "champagne", name: "Champagne", methods: "The gold standard for sparkling wine." },
+      { id: "rhone", name: "Rhône Valley", methods: "Northern Syrah and Southern Grenache." },
+      { id: "loire", name: "Loire Valley", methods: "Cool climate whites and Cabernet Franc." },
+      { id: "alsace", name: "Alsace", methods: "Aromatic whites with Germanic influence." },
+      { id: "provence", name: "Provence", methods: "The global home of dry, pale Rosé." },
+      { id: "languedoc", name: "Languedoc-Roussillon", methods: "The engine room of French value." }
     ]
   },
   {
     id: "usa",
     name: "USA",
-    description: "Napa, Sonoma, and the Pacific Northwest.",
+    description: "Pioneers of the New World style.",
     subRegions: [
-      { 
-        name: "Napa Valley", methods: "Valley floor vs Mountain fruit styles.", 
-        wines: [
-          { name: "Oakville Cabernet", grape: "Cabernet", pro: "Perfect balance of power and velvety texture.", food: ["Steak"] },
-          { name: "Rutherford Cabernet", grape: "Cabernet", pro: "Famous for 'Rutherford Dust' earthy tannins.", food: ["Grilled Meats"] },
-          { name: "Stags Leap Cabernet", grape: "Cabernet", pro: "Soft, supple, and very elegant style.", food: ["Filet Mignon"] },
-          { name: "Mountain Fruit (Howell Mtn)", grape: "Cabernet", pro: "Inky, massive tannins, built for 20 years.", food: ["Venison"] },
-          { name: "Carneros Chardonnay", grape: "Chardonnay", pro: "Cooler climate. Apple and bright acid.", food: ["Chicken"] }
-        ] 
-      },
-      { name: "Oregon", methods: "The 45th Parallel.", wines: [{ name: "Willamette Pinot", grape: "Pinot Noir", pro: "Elegant and earthy." }, { name: "Dundee Hills Pinot", grape: "Pinot Noir", pro: "Red fruit and iron-rich soil." }] }
+      { id: "napa", name: "Napa Valley", methods: "World-class Cabernet on volcanic soil." },
+      { id: "sonoma", name: "Sonoma County", methods: "Diverse climates; Pinot to Zinfandel." },
+      { id: "oregon", name: "Oregon", methods: "Specializing in Willamette Valley Pinot Noir." },
+      { id: "washington", name: "Washington State", methods: "High-latitude desert viticulture." },
+      { id: "central_coast", name: "Central Coast (CA)", methods: "Pacific cooling and Rhone varieties." },
+      { id: "finger_lakes", name: "Finger Lakes (NY)", methods: "Cool-climate Riesling specialist." }
     ]
   },
   {
-    id: "new-zealand",
-    name: "New Zealand",
-    description: "High intensity, high acid, and pure fruit.",
+    id: "spain",
+    name: "Spain",
+    description: "Mastery of oak and extreme high-altitude viticulture.",
     subRegions: [
-      { 
-        name: "Marlborough", methods: "Ocean influence and gravelly riverbeds.", 
-        wines: [
-          { name: "Sauvignon Blanc", grape: "Sauvignon Blanc", pro: "Passionfruit and gooseberry explosion.", food: ["Goat Cheese"] },
-          { name: "Marlborough Chardonnay", grape: "Chardonnay", pro: "Citrus-driven and high energy white.", food: ["Seafood"] },
-          { name: "Pinot Noir", grape: "Pinot Noir", pro: "Lighter, red-fruit-focused style.", food: ["Salmon"] },
-          { name: "Riesling", grape: "Riesling", pro: "Lime zest and high-octane acidity.", food: ["Thai"] },
-          { name: "Pinot Gris", grape: "Pinot Gris", pro: "Off-dry, pear, and spice notes.", food: ["Indian"] }
-        ] 
-      }
+      { id: "rioja", name: "Rioja", methods: "Tempranillo aged in American and French oak." },
+      { id: "ribera", name: "Ribera del Duero", methods: "High-altitude, powerful Tempranillo." },
+      { id: "priorat", name: "Priorat", methods: "Llicorella (slate) soils and ancient Garnacha." },
+      { id: "rías_baixas", name: "Rías Baixas", methods: "Atlantic influence; home of Albariño." },
+      { id: "jerez", name: "Jerez (Sherry)", methods: "The unique Solera system of aging." },
+      { id: "catalonia", name: "Penedès / Cava", methods: "The center of Spanish sparkling wine." }
+    ]
+  },
+  {
+    id: "new_zealand",
+    name: "New Zealand",
+    description: "Untouched nature and high-intensity aromatics.",
+    subRegions: [
+      { id: "marlborough", name: "Marlborough", methods: "Intense sunlight and cool ocean nights." },
+      { id: "central_otago", name: "Central Otago", methods: "World's southernmost vineyards." },
+      { id: "hawkes_bay", name: "Hawke's Bay", methods: "Warmer region for Syrah and Bordeaux blends." },
+      { id: "martinborough", name: "Martinborough", methods: "Small-scale, high-quality Pinot Noir." }
+    ]
+  },
+  {
+    id: "australia",
+    name: "Australia",
+    description: "Bold styles and some of the world's oldest vines.",
+    subRegions: [
+      { id: "barossa", name: "Barossa Valley", methods: "Ancient Shiraz and warm-climate power." },
+      { id: "mclaren_vale", name: "McLaren Vale", methods: "Coastal Shiraz and Cabernet." },
+      { id: "yarra", name: "Yarra Valley", methods: "Cool-climate Pinot Noir and Chardonnay." },
+      { id: "margaret_river", name: "Margaret River", methods: "Bordeaux-like climate; elegant Cabernet." },
+      { id: "hunter_valley", name: "Hunter Valley", methods: "Iconic Semillon and historical Shiraz." }
+    ]
+  },
+  {
+    id: "argentina",
+    name: "Argentina",
+    description: "Viticulture at the foot of the Andes.",
+    subRegions: [
+      { id: "mendoza", name: "Mendoza", methods: "High-altitude Malbec across three zones." },
+      { id: "salta", name: "Salta / Cafayate", methods: "World's highest vineyards; Torrontés focus." },
+      { id: "patagonia", name: "Patagonia", methods: "Cool, windy, and southern Pinot Noir." }
+    ]
+  },
+  {
+    id: "germany",
+    name: "Germany",
+    description: "Precision, slate, and the home of Riesling.",
+    subRegions: [
+      { id: "mosel", name: "Mosel", methods: "Extremely steep slate slopes." },
+      { id: "rheingau", name: "Rheingau", methods: "Historic estates and powerful Riesling." },
+      { id: "pfalz", name: "Pfalz", methods: "Sunny, warmer climate for diverse varieties." },
+      { id: "rheinhessen", name: "Rheinhessen", methods: "Innovation and dry Riesling leadership." }
     ]
   }
 ];
