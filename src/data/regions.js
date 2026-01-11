@@ -2,75 +2,44 @@ export const REGIONS_DATA = [
   {
     id: "italy",
     name: "Italy",
-    description: "The world's most complex wine landscape.",
+    description: "20 Regions, 1000+ grapes. The land of acidity and tradition.",
+    image: "/images/italy-hero.jpg",
     subRegions: [
-      {
-        name: "Piedmont (North)",
-        methods: "Traditional aging in large 'Botte' oak. Focus on single-vineyard expressions.",
-        wines: [
-          { name: "Barolo", grape: "Nebbiolo", profile: "Earthy, powerful, floral", pro: "The most prestigious wine in Italy." },
-          { name: "Gavi", grape: "Cortese", profile: "Crisp, almondy, white flowers", pro: "The perfect Italian alternative to Chablis." }
-        ]
-      },
-      {
-        name: "Tuscany (Central)",
-        methods: "Blending Sangiovese with French grapes (Super Tuscans). Use of 'Galestro' soil.",
-        wines: [
-          { name: "Chianti Classico", grape: "Sangiovese", profile: "Sour cherry, herbs, dry", pro: "Look for the Black Rooster symbol." },
-          { name: "Brunello", grape: "Sangiovese", profile: "Deep, chocolate, tobacco", pro: "Requires 5 years of aging before release." }
-        ]
-      },
-      {
-        name: "Veneto (North-East)",
-        methods: "Appassimento (Drying grapes on straw mats to concentrate sugar/flavor).",
-        wines: [
-          { name: "Amarone", grape: "Corvina Blend", profile: "Raisin, fig, dark chocolate", pro: "Massive alcohol, usually 15-16%." }
-        ]
-      }
+      { name: "Piedmont", methods: "Long maceration, Botte aging.", wines: [{name:"Barolo", grape:"Nebbiolo", pro:"King of wines."}, {name:"Barbaresco", grape:"Nebbiolo", pro:"The Queen; more elegant."}, {name:"Gavi", grape:"Cortese", pro:"Crisp, mineral white."}] },
+      { name: "Tuscany", methods: "Sangiovese blends, French Barrique.", wines: [{name:"Brunello", grape:"Sangiovese", pro:"Power & Longevity."}, {name:"Chianti Classico", grape:"Sangiovese", pro:"The Black Rooster standard."}, {name:"Bolgheri", grape:"Cabernet/Merlot", pro:"The Super Tuscans."}] },
+      { name: "Veneto", methods: "Appassimento (Dried grapes).", wines: [{name:"Amarone", grape:"Corvina", pro:"Rich, dried fruit flavors."}, {name:"Valpolicella", grape:"Corvina", pro:"Fresh cherry flavors."}, {name:"Prosecco", grape:"Glera", pro:"Charmat method bubbles."}] },
+      { name: "Alto Adige", methods: "Alpine viticulture.", wines: [{name:"Pinot Grigio", grape:"Pinot Grigio", pro:"High-altitude, flinty."}, {name:"Gewürztraminer", grape:"Gewürztraminer", pro:"Highly aromatic, lychee."}] },
+      { name: "Sicily", methods: "Volcanic soil (Etna).", wines: [{name:"Etna Rosso", grape:"Nerello Mascalese", pro:"The Burgundy of the Mediterranean."}, {name:"Grillo", grape:"Grillo", pro:"Saline, citrusy white."}] },
+      { name: "Puglia", methods: "Hot climate, high extraction.", wines: [{name:"Primitivo", grape:"Primitivo", pro:"Jammy, high alcohol, bold."}] },
+      { name: "Campania", methods: "Ancient volcanic grapes.", wines: [{name:"Taurasi", grape:"Aglianico", pro:"The Barolo of the South."}] }
     ]
   },
   {
     id: "france",
     name: "France",
-    description: "The birthplace of 'Terroir'.",
+    description: "The global benchmark for structure and elegance.",
+    image: "/images/france-hero.jpg",
     subRegions: [
-      {
-        name: "Burgundy",
-        methods: "Small parcel farming (Lieus-dits). Minimal intervention.",
-        wines: [
-          { name: "Chablis", grape: "Chardonnay", profile: "Steel, salt, green apple", pro: "Grown in fossilized oyster shells." },
-          { name: "Côte de Nuits", grape: "Pinot Noir", profile: "Silk, raspberry, earth", pro: "The world standard for Pinot Noir." }
-        ]
-      },
-      {
-        name: "Bordeaux",
-        methods: "The 'Château' system. Aging in 225L French Oak barrels (Barriques).",
-        wines: [
-          { name: "Pauillac", grape: "Cabernet Sauvignon", profile: "Pencil lead, cedar, power", pro: "The 'business' wine. Very expensive." },
-          { name: "St. Émilion", grape: "Merlot", profile: "Plum, velvet, violet", pro: "Softer and more approachable than the Left Bank." }
-        ]
-      }
+      { name: "Bordeaux", methods: "Blending (Assemblage), New Oak.", wines: [{name:"Médoc", grape:"Cabernet Sauvignon", pro:"Left bank, gravel soil."}, {name:"St-Émilion", grape:"Merlot", pro:"Right bank, clay soil."}, {name:"Sauternes", grape:"Semillon/Sauvignon", pro:"Noble rot sweet wine."}] },
+      { name: "Burgundy", methods: "Single vineyard (Climat) focus.", wines: [{name:"Chablis", grape:"Chardonnay", pro:"Pure mineral, no oak."}, {name:"Côte de Nuits", grape:"Pinot Noir", pro:"World-class red."}, {name:"Côte de Beaune", grape:"Chardonnay", pro:"World-class white."}] },
+      { name: "Rhône Valley", methods: "Northern (Syrah) vs Southern (Blends).", wines: [{name:"Hermitage", grape:"Syrah", pro:"Smoky, meaty red."}, {name:"Châteauneuf-du-Pape", grape:"Grenache Blend", pro:"13 grapes allowed."}, {name:"Condrieu", grape:"Viognier", pro:"Apricot and floral white."}] },
+      { name: "Loire Valley", methods: "Focus on freshness and high acid.", wines: [{name:"Sancerre", grape:"Sauvignon Blanc", pro:"Flinty white."}, {name:"Chinon", grape:"Cabernet Franc", pro:"Herbal, bell pepper red."}] },
+      { name: "Champagne", methods: "Méthode Champenoise (Second fermentation in bottle).", wines: [{name:"Côte des Blancs", grape:"Chardonnay", pro:"Blanc de Blancs style."}, {name:"Montagne de Reims", grape:"Pinot Noir", pro:"Structure and body."}] },
+      { name: "Alsace", methods: "Varietal labeling, Germanic influence.", wines: [{name:"Riesling", grape:"Riesling", pro:"Dry, petrol notes, lime."}] }
     ]
   },
   {
     id: "australia",
     name: "Australia",
-    description: "Bold sunshine meets modern science.",
+    description: "From ancient vines to cool-climate elegance.",
+    image: "/images/australia-hero.jpg",
     subRegions: [
-      {
-        name: "Barossa Valley",
-        methods: "Old vine conservation (some vines are 150+ years old). High ripeness.",
-        wines: [
-          { name: "Barossa Shiraz", grape: "Syrah/Shiraz", profile: "Blackberry, mocha, spice", pro: "A fruit-powerhouse. Crowds love this." }
-        ]
-      },
-      {
-        name: "Margaret River",
-        methods: "Maritime cooling. Focus on elegant French styles.",
-        wines: [
-          { name: "M.R. Cabernet", grape: "Cabernet Sauvignon", profile: "Cassis, mint, bay leaf", pro: "The 'Bordeaux' of the Southern Hemisphere." }
-        ]
-      }
+      { name: "Barossa Valley", methods: "Old vine Shiraz (100yr+ vines).", wines: [{name:"Barossa Shiraz", grape:"Shiraz", pro:"The Aussie icon."}] },
+      { name: "Margaret River", methods: "Maritime influence (Indian Ocean).", wines: [{name:"M.R. Cabernet", grape:"Cabernet Sauvignon", pro:"Elegance like Bordeaux."}, {name:"M.R. Chardonnay", grape:"Chardonnay", pro:"Gingin clone, powerful."}] },
+      { name: "Hunter Valley", methods: "Early pick, low alcohol aging.", wines: [{name:"Hunter Semillon", grape:"Semillon", pro:"Ages 20 years into toast."}] },
+      { name: "Yarra Valley", methods: "Cool climate, whole bunch press.", wines: [{name:"Yarra Pinot", grape:"Pinot Noir", pro:"Bright, ethereal red."}] },
+      { name: "Coonawarra", methods: "Terra Rossa (Red Soil) influence.", wines: [{name:"Coonawarra Cab", grape:"Cabernet Sauvignon", pro:"Distinct minty note."}] },
+      { name: "Adelaide Hills", methods: "High altitude, cool nights.", wines: [{name:"Sauvignon Blanc", grape:"Sauvignon Blanc", pro:"Tropical but zesty."}] }
     ]
   }
 ];
