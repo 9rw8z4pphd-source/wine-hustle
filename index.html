@@ -1,126 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wine Manager Pro</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wine Hustle Manager</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <style>
-        body { background-color: #0f172a; color: white; font-family: sans-serif; }
-        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .active-tab { border-bottom: 3px solid #f59e0b; color: #f59e0b; }
-    </style>
-</head>
-<body>
+  </head>
+  <body>
     <div id="root"></div>
-
-    <script type="text/babel">
-        const { useState, useMemo } = React;
-
-        const DATABASE = [
-            // ITALY
-            { name: "Barolo", region: "Piedmont, Italy", grape: "Nebbiolo", profile: "High Tannin & Acid", notes: "Smells of roses, tar, and dried cherries.", pro: "The 'King of Wines'. Very dry. Needs rich food like truffle pasta.", tags: ["Italy", "Red", "Pro"] },
-            { name: "Chianti Classico", region: "Tuscany, Italy", grape: "Sangiovese", profile: "High Acid, Med Tannin", notes: "Sour cherry, dried oregano, and balsamic.", pro: "Look for the 'Black Rooster' seal. The ultimate pizza/tomato sauce wine.", tags: ["Italy", "Red"] },
-            { name: "Brunello di Montalcino", region: "Tuscany, Italy", grape: "Sangiovese Grosso", profile: "Full Body, Power", notes: "Blackberry, leather, and chocolate.", pro: "Expensive and powerful. Decant for at least 1 hour before serving.", tags: ["Italy", "Red", "Luxury"] },
-            
-            // FRANCE
-            { name: "Chablis", region: "Burgundy, France", grape: "Chardonnay", profile: "Lean, Mineral, No Oak", notes: "Green apple, lemon, and oyster shell.", pro: "Unlike Cali-Chardonnay, this is NOT buttery. It tastes like 'rocks'. Best with Oysters.", tags: ["France", "White"] },
-            { name: "Bordeaux (Left Bank)", region: "Medoc, France", grape: "Cabernet Sauvignon Blend", profile: "Structured & Earthy", notes: "Graphite (pencil lead), blackcurrant, tobacco.", pro: "The world standard for fine red wine. Pairs with lamb and beef.", tags: ["France", "Red", "Pro"] },
-            { name: "Sancerre", region: "Loire Valley, France", grape: "Sauvignon Blanc", profile: "Sharp & Elegant", notes: "Citrus, flint, and white flowers.", pro: "The most famous Sauvignon Blanc in the world. High-end crowd favorite.", tags: ["France", "White"] },
-
-            // AUSTRALIA
-            { name: "Barossa Shiraz", region: "South Australia", grape: "Shiraz", profile: "Huge Body, Fruit Bomb", notes: "Blueberry jam, chocolate, and black pepper.", pro: "High alcohol (14.5%+). Thick and juicy. Very popular with casual drinkers.", tags: ["Australia", "Red"] },
-            { name: "Hunter Valley Semillon", region: "NSW, Australia", grape: "Semillon", profile: "Bone Dry, Low Alcohol", notes: "Lemon, lime, and toast (as it ages).", pro: "Australia's gift to the wine world. Tastes like 'lightning' when young.", tags: ["Australia", "White"] },
-            { name: "Margaret River Cab", region: "Western Australia", grape: "Cabernet Sauvignon", profile: "Refined & Herbal", notes: "Blackberry and bay leaf.", pro: "More 'French' in style than Barossa. Very elegant.", tags: ["Australia", "Red"] }
-        ];
-
-        const QUIZ_DATA = [
-            { q: "Which Italian wine is known as the 'King of Wines'?", a: ["Barolo", "Chianti", "Pinot Grigio"], correct: 0 },
-            { q: "A customer wants a buttery, oaky white. What is the grape?", a: ["Sauvignon Blanc", "Chardonnay", "Riesling"], correct: 1 },
-            { q: "What does Tannin feel like in the mouth?", a: ["Watery/Sour", "Drying/Gripping", "Burning/Hot"], correct: 1 }
-        ];
-
-        function App() {
-            const [view, setView] = useState('explore');
-            const [search, setSearch] = useState('');
-            const [quizIdx, setQuizIdx] = useState(0);
-
-            const filtered = DATABASE.filter(w => 
-                w.name.toLowerCase().includes(search.toLowerCase()) || 
-                w.region.toLowerCase().includes(search.toLowerCase()) ||
-                w.tags.some(t => t.toLowerCase().includes(search.toLowerCase()))
-            );
-
-            return (
-                <div className="max-w-2xl mx-auto min-h-screen p-4 pb-24">
-                    <header className="py-6 text-center">
-                        <h1 className="text-3xl font-bold text-amber-500">WINE MANAGER PRO</h1>
-                    </header>
-
-                    {/* Navigation */}
-                    <div className="flex justify-around mb-8 border-b border-gray-700">
-                        <button onClick={() => setView('explore')} className={`pb-2 px-4 ${view === 'explore' ? 'active-tab' : ''}`}>EXPLORE</button>
-                        <button onClick={() => setView('quiz')} className={`pb-2 px-4 ${view === 'quiz' ? 'active-tab' : ''}`}>TRAINING</button>
-                    </div>
-
-                    {view === 'explore' ? (
-                        <div className="animate__animated animate__fadeIn">
-                            <input 
-                                type="text" 
-                                placeholder="Search regions (Italy, France), grapes, or wine name..." 
-                                className="w-full p-4 rounded-xl bg-gray-800 border border-gray-700 mb-6 focus:border-amber-500 outline-none"
-                                onChange={(e) => setSearch(e.target.value)}
-                            />
-                            
-                            <div className="space-y-4">
-                                {filtered.map(wine => (
-                                    <div key={wine.name} className="glass p-6 rounded-2xl">
-                                        <div className="flex justify-between items-start mb-2">
-                                            <h3 className="text-xl font-bold text-white">{wine.name}</h3>
-                                            <span className="text-xs bg-amber-500/20 text-amber-500 px-2 py-1 rounded tracking-tighter uppercase font-bold">{wine.region}</span>
-                                        </div>
-                                        <p className="text-sm text-gray-400 mb-4"><strong>Grape:</strong> {wine.grape} | <strong>Body:</strong> {wine.profile}</p>
-                                        <div className="bg-white/5 p-3 rounded-lg border-l-4 border-amber-500 italic text-gray-200">
-                                            {wine.pro}
-                                        </div>
-                                        <p className="mt-3 text-sm">📝 {wine.notes}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    ) : (
-                        <div className="text-center py-10 glass rounded-3xl p-8">
-                            <h2 className="text-xl mb-6">{QUIZ_DATA[quizIdx].q}</h2>
-                            <div className="space-y-3">
-                                {QUIZ_DATA[quizIdx].a.map((opt, i) => (
-                                    <button 
-                                        key={i}
-                                        onClick={() => {
-                                            if(i === QUIZ_DATA[quizIdx].correct) {
-                                                alert("Correct!");
-                                                if(quizIdx < QUIZ_DATA.length - 1) setQuizIdx(quizIdx + 1);
-                                                else setQuizIdx(0);
-                                            } else {
-                                                alert("Try again!");
-                                            }
-                                        }}
-                                        className="w-full p-4 rounded-xl bg-gray-800 hover:bg-amber-600 transition-colors font-bold"
-                                    >
-                                        {opt}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                    )}
-                </div>
-            );
-        }
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
-</body>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
