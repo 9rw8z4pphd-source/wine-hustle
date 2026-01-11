@@ -2,114 +2,114 @@ import React, { useState } from 'react';
 import { REGIONS_DATA } from './wines.js';
 
 export default function App() {
-  const [currentLevel, setCurrentLevel] = useState('home'); // home, country, region
-  const [selectedCountry, setSelectedCountry] = useState(null);
-  const [selectedRegion, setSelectedRegion] = useState(null);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [view, setView] = useState('home');
+  const [activeItem, setActiveItem] = useState(null);
+  const [searchVisible, setSearchVisible] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  // --- NAVIGATION HELPERS ---
-  const goHome = () => { setCurrentLevel('home'); setSelectedCountry(null); setSelectedRegion(null); };
-  const selectCountry = (c) => { setSelectedCountry(c); setCurrentLevel('country'); };
-  const selectRegion = (r) => { setSelectedRegion(r); setCurrentLevel('region'); };
+  const goHome = () => { setView('home'); setActiveItem(null); };
 
   return (
-    <div className="min-h-screen bg-[#121212] text-[#EAE0D5] font-sans pb-10">
-      {/* TOP NAV BAR */}
-      <nav className="flex justify-between items-center p-6 border-b border-white/10 bg-[#1a1a1a] sticky top-0 z-50">
-        <div onClick={goHome} className="cursor-pointer">
-          <h1 className="text-2xl font-black tracking-tighter text-[#E2725B]">WINE ACADEMY</h1>
-        </div>
+    <div className="min-h-screen bg-[#1A1A1A] text-[#F4F1DE] font-sans pb-12">
+      {/* HEADER BAR */}
+      <nav className="flex justify-between items-center p-6 bg-[#252525] border-b border-white/5 sticky top-0 z-50">
+        <h1 onClick={goHome} className="text-xl font-black tracking-widest text-[#E2725B] cursor-pointer">WINE ACADEMY</h1>
         <button 
-          onClick={() => setSearchOpen(!searchOpen)}
-          className="p-2 bg-[#E2725B]/10 rounded-full text-[#E2725B] hover:bg-[#E2725B]/20 transition-all"
+          onClick={() => setSearchVisible(!searchVisible)}
+          className="w-10 h-10 flex items-center justify-center rounded-full bg-[#E2725B]/10 text-[#E2725B] border border-[#E2725B]/20"
         >
-          🔍
+          {searchVisible ? '✕' : '🔍'}
         </button>
       </nav>
 
       {/* SEARCH OVERLAY */}
-      {searchOpen && (
-        <div className="p-4 bg-[#E2725B] text-white animate-fadeIn">
-          <input className="w-full bg-white/20 placeholder-white/60 p-3 rounded-lg outline-none" placeholder="Search grapes or regions..." />
+      {searchVisible && (
+        <div className="p-4 bg-[#E2725B] animate-slideDown">
+          <input 
+            className="w-full bg-white/20 border-none p-3 rounded-lg text-white placeholder-white/60 outline-none"
+            placeholder="Search grapes, regions, or methods..."
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
       )}
 
-      {/* BREADCRUMBS (ADD Focus Helper) */}
-      <div className="px-6 py-4 text-[10px] uppercase tracking-widest text-[#E2725B] font-bold">
-        <span onClick={goHome} className="cursor-pointer">World</span> 
-        {selectedCountry && <span onClick={() => setCurrentLevel('country')}> / {selectedCountry.name}</span>}
-        {selectedRegion && <span> / {selectedRegion.name}</span>}
-      </div>
-
       <main className="p-6 max-w-2xl mx-auto">
-        
-        {/* LEVEL 1: WORLD VIEW (HOME) */}
-        {currentLevel === 'home' && (
-          <div className="space-y-6 animate-fadeIn">
-            <h2 className="text-4xl font-serif mb-8 text-[#C6AC8F]">The Wine Regions</h2>
+        {/* BREADCRUMB */}
+        {view !== 'home' && (
+          <button onClick={goHome} className="text-[#E2725B] text-xs font-bold mb-6 tracking-widest uppercase">
+            ← Back to World
+          </button>
+        )}
+
+        {/* HOME VIEW: COUNTRIES */}
+        {view === 'home' && (
+          <div className="space-y-6">
+            <header className="mb-10">
+              <h2 className="text-4xl font-serif text-[#F4F1DE]">Global Regions</h2>
+              <p className="text-slate-500 mt-2">Select a territory to begin your training.</p>
+            </header>
             {REGIONS_DATA.map(country => (
               <div 
-                key={country.id} 
-                onClick={() => selectCountry(country)}
-                className="group relative overflow-hidden rounded-3xl bg-[#1c1c1c] border border-white/5 p-8 cursor-pointer hover:border-[#E2725B]/50 transition-all"
+                key={country.id}
+                onClick={() => { setView('country'); setActiveItem(country); }}
+                className="group p-8 rounded-[2rem] bg-[#252525] border border-white/5 hover:border-[#E2725B]/40 transition-all cursor-pointer shadow-xl"
               >
-                <h3 className="text-3xl font-bold mb-2">{country.name}</h3>
-                <p className="text-[#A9927D] leading-relaxed">{country.description}</p>
-                <div className="mt-6 text-[#E2725B] font-bold text-sm">Explore {country.subRegions.length} Regions →</div>
+                <h3 className="text-3xl font-bold group-hover:text-[#E2725B] transition-colors">{country.name}</h3>
+                <p className="text-slate-400 mt-2">{country.description}</p>
+                <div className="mt-6 flex items-center text-[#E2725B] text-xs font-black tracking-widest uppercase">
+                  Explore {country.subRegions.length} Regions <span className="ml-2">→</span>
+                </div>
               </div>
             ))}
           </div>
         )}
 
-        {/* LEVEL 2: COUNTRY VIEW */}
-        {currentLevel === 'country' && selectedCountry && (
+        {/* COUNTRY VIEW: SUB-REGIONS */}
+        {view === 'country' && activeItem && (
           <div className="animate-fadeIn">
-            <button onClick={goHome} className="mb-6 text-sm text-[#A9927D]">← Back to World</button>
-            <h2 className="text-4xl font-serif mb-8">{selectedCountry.name}</h2>
+            <h2 className="text-5xl font-serif mb-10">{activeItem.name}</h2>
             <div className="grid gap-4">
-              {selectedCountry.subRegions.map(region => (
+              {activeItem.subRegions.map(region => (
                 <div 
                   key={region.name}
-                  onClick={() => selectRegion(region)}
-                  className="p-6 bg-[#1c1c1c] rounded-2xl border-l-4 border-[#E2725B] hover:bg-[#252525] transition-all cursor-pointer"
+                  onClick={() => { setView('region'); setActiveItem(region); }}
+                  className="p-6 bg-[#252525] rounded-2xl border-l-4 border-[#E2725B] hover:bg-[#2D2D2D] transition-all cursor-pointer"
                 >
                   <h3 className="text-xl font-bold">{region.name}</h3>
-                  <p className="text-sm text-[#A9927D] mt-1">Climate: {region.climate}</p>
+                  <p className="text-xs text-[#E2725B] uppercase tracking-tighter mt-1 font-bold">Deep Dive Available</p>
                 </div>
               ))}
             </div>
           </div>
         )}
 
-        {/* LEVEL 3: REGION DETAIL (DEEP DIVE) */}
-        {currentLevel === 'region' && selectedRegion && (
+        {/* REGION VIEW: WINES & METHODS */}
+        {view === 'region' && activeItem && (
           <div className="animate-fadeIn">
-            <button onClick={() => setCurrentLevel('country')} className="mb-6 text-sm text-[#A9927D]">← Back to {selectedCountry.name}</button>
-            <h2 className="text-4xl font-serif text-[#E2725B] mb-2">{selectedRegion.name}</h2>
+            <h2 className="text-4xl font-serif text-[#E2725B] mb-2">{activeItem.name}</h2>
             
-            <div className="mt-8 p-6 bg-[#252525] rounded-3xl border border-white/5">
-              <h4 className="text-[10px] uppercase tracking-[0.2em] text-[#A9927D] mb-4">Winemaking Methods</h4>
-              <p className="text-lg italic leading-relaxed text-[#C6AC8F]">{selectedRegion.methods}</p>
+            <div className="my-8 p-6 bg-[#E2725B]/5 border border-[#E2725B]/20 rounded-3xl">
+              <h4 className="text-[10px] font-black text-[#E2725B] tracking-widest mb-3 uppercase">Regional Methodology</h4>
+              <p className="text-lg leading-relaxed text-slate-300 italic">{activeItem.methods}</p>
             </div>
 
-            <div className="mt-10 space-y-8">
-              <h4 className="text-[10px] uppercase tracking-[0.2em] text-[#A9927D]">Key Wines & Grapes</h4>
-              {selectedRegion.wines.map(wine => (
-                <div key={wine.name} className="border-b border-white/10 pb-6">
-                  <div className="flex justify-between items-baseline">
-                    <h3 className="text-2xl font-bold">{wine.name}</h3>
-                    <span className="text-[#E2725B] text-xs font-mono">{wine.grape}</span>
+            <div className="space-y-10">
+              <h4 className="text-[10px] font-black text-slate-500 tracking-widest uppercase border-b border-white/10 pb-2">Iconic Wines & Grapes</h4>
+              {activeItem.wines.map(wine => (
+                <div key={wine.name} className="group">
+                  <div className="flex justify-between items-baseline mb-2">
+                    <h3 className="text-2xl font-bold text-white">{wine.name}</h3>
+                    <span className="text-[#E2725B] font-mono text-sm">{wine.grape}</span>
                   </div>
-                  <p className="mt-2 text-[#A9927D]">{wine.profile}</p>
-                  <div className="mt-4 p-4 bg-white/5 rounded-xl border-l-2 border-[#E2725B] text-sm italic">
-                    "Manager's Pitch: {wine.pro}"
+                  <p className="text-slate-400 leading-relaxed mb-4">{wine.profile}</p>
+                  <div className="p-4 bg-white/5 rounded-xl border-l-2 border-[#E2725B] text-sm italic text-slate-300">
+                    "{wine.pro}"
                   </div>
                 </div>
               ))}
             </div>
           </div>
         )}
-
       </main>
     </div>
   );
