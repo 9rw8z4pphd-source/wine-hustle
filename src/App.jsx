@@ -15,22 +15,9 @@ export default function App() {
     setActiveCountry(country);
     setActiveRegion(region);
     setMenuOpen(false);
-    setSearchQuery(''); // Clear search on navigate
+    setSearchQuery('');
     window.scrollTo(0, 0);
   };
-
-  // CROSS-DATA SEARCH LOGIC
-  const searchResults = useMemo(() => {
-    if (!searchQuery) return null;
-    const query = searchQuery.toLowerCase();
-    
-    return {
-      grapes: GRAPES_DATA.filter(g => g.name.toLowerCase().includes(query) || g.flavors.some(f => f.toLowerCase().includes(query))),
-      countries: REGIONS_DATA.filter(c => c.name.toLowerCase().includes(query)),
-      // Finding regions by searching their methods or names
-      regions: REGIONS_DATA.flatMap(c => c.subRegions).filter(r => r.name.toLowerCase().includes(query) || r.methods.toLowerCase().includes(query))
-    };
-  }, [searchQuery]);
 
   const handleGrapeClick = (grapeName) => {
     const grapeId = grapeName.toLowerCase().replace(/ /g, '-').split('/')[0].trim();
@@ -44,143 +31,136 @@ export default function App() {
   };
 
   const PowerBar = ({ label, level }) => (
-    <div className="mb-4">
-      <div className="flex justify-between text-[10px] uppercase tracking-tighter mb-1 text-slate-400">
+    <div className="mb-6">
+      <div className="flex justify-between text-[10px] uppercase font-black tracking-widest mb-2 text-slate-500">
         <span>{label}</span>
-        <span>{level} / 5</span>
+        <span className="text-[#E2725B]">{level} / 5</span>
       </div>
-      <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-        <div className="h-full bg-[#E2725B] shadow-[0_0_8px_#E2725B]" style={{ width: `${(level / 5) * 100}%` }} />
+      <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+        <div 
+          className="h-full bg-[#E2725B] shadow-[0_0_12px_#E2725B]" 
+          style={{ width: `${(level / 5) * 100}%` }} 
+        />
       </div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-[#0D0D0D] text-[#F4F1DE] font-sans pb-20">
+    <div className="min-h-screen bg-[#0D0D0D] text-[#F4F1DE] font-sans selection:bg-[#E2725B] selection:text-white">
       
-      {/* SIDEBAR NAVIGATION */}
-      <div className={`fixed inset-0 z-[200] flex transition-opacity duration-300 ${menuOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-        <div className={`w-80 bg-[#161616] h-full p-10 border-r border-[#E2725B]/30 transform transition-transform duration-300 ${menuOpen ? "translate-x-0" : "-translate-x-full"}`}>
-          <h2 className="text-[#E2725B] font-black tracking-[0.3em] text-[10px] uppercase mb-10 italic">Menu</h2>
-          <nav className="space-y-6">
-            <button onClick={() => navigate('home')} className="block text-3xl font-serif hover:text-[#E2725B] italic">World Regions</button>
-            <button onClick={() => navigate('grapes')} className="block text-3xl font-serif hover:text-[#E2725B] italic">Grape DNA</button>
+      {/* OVERLAY MENU */}
+      <div className={`fixed inset-0 z-[200] flex transition-all duration-500 ${menuOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+        <div className={`w-80 bg-[#111] h-full p-12 border-r border-white/5 transform transition-transform duration-500 ${menuOpen ? "translate-x-0" : "-translate-x-full"}`}>
+          <p className="text-[#E2725B] font-black tracking-[0.4em] text-[10px] uppercase mb-12">Archive v1.0</p>
+          <nav className="space-y-8">
+            <button onClick={() => navigate('home')} className="block text-4xl font-serif hover:text-[#E2725B] transition-colors italic">Atlas</button>
+            <button onClick={() => navigate('grapes')} className="block text-4xl font-serif hover:text-[#E2725B] transition-colors italic">Genetics</button>
           </nav>
         </div>
-        <div className="flex-1 bg-black/60 backdrop-blur-sm" onClick={() => setMenuOpen(false)}></div>
+        <div className="flex-1 bg-black/80 backdrop-blur-md" onClick={() => setMenuOpen(false)}></div>
       </div>
 
-      {/* HEADER WITH SEARCH BAR */}
-      <nav className="bg-[#161616]/90 backdrop-blur-md sticky top-0 z-[100] border-b border-white/5 px-6 py-4">
-        <div className="max-w-5xl mx-auto flex items-center gap-6">
-          <button onClick={() => setMenuOpen(true)} className="text-3xl text-[#E2725B]">☰</button>
+      {/* SEARCH & HEADER */}
+      <nav className="sticky top-0 z-[100] bg-[#0D0D0D]/80 backdrop-blur-xl border-b border-white/5 px-8 py-5">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-12">
+          <button onClick={() => setMenuOpen(true)} className="text-2xl hover:scale-125 transition-transform text-[#E2725B]">☰</button>
           
-          <div className="flex-1 relative">
+          <div className="flex-1 max-w-xl relative hidden md:block">
             <input 
               type="text" 
-              placeholder="Search grapes, regions, or food pairings..." 
+              placeholder="Search by variety, soil, or appellation..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-full py-2 px-6 focus:outline-none focus:border-[#E2725B]/50 text-sm transition-all"
+              className="w-full bg-white/5 border border-white/10 rounded-full py-2.5 px-8 text-sm focus:outline-none focus:ring-1 focus:ring-[#E2725B]/50 transition-all"
             />
-            {searchQuery && (
-              <div className="absolute top-full left-0 right-0 mt-2 bg-[#1a1a1a] border border-white/10 rounded-2xl shadow-2xl p-4 max-h-[60vh] overflow-y-auto z-[300]">
-                {searchResults?.grapes.length > 0 && (
-                  <div className="mb-4">
-                    <p className="text-[10px] uppercase font-black text-[#E2725B] mb-2">Grapes</p>
-                    {searchResults.grapes.map(g => (
-                      <div key={g.id} onClick={() => handleGrapeClick(g.name)} className="py-2 px-3 hover:bg-white/5 rounded-lg cursor-pointer">
-                        {g.name} <span className="text-slate-500 text-xs">— {g.style}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {searchResults?.countries.length > 0 && (
-                  <div className="mb-4">
-                    <p className="text-[10px] uppercase font-black text-[#E2725B] mb-2">Countries</p>
-                    {searchResults.countries.map(c => (
-                      <div key={c.id} onClick={() => navigate('country', c)} className="py-2 px-3 hover:bg-white/5 rounded-lg cursor-pointer">{c.name}</div>
-                    ))}
-                  </div>
-                )}
-                {(!searchResults?.grapes.length && !searchResults?.countries.length && !searchResults?.regions.length) && (
-                  <p className="text-xs text-slate-500 italic p-2">No direct matches found...</p>
-                )}
-              </div>
-            )}
           </div>
 
-          <h1 onClick={() => navigate('home')} className="hidden md:block text-xl font-black text-[#E2725B] italic cursor-pointer uppercase tracking-widest">Wine Scholar</h1>
+          <h1 onClick={() => navigate('home')} className="text-xl font-black tracking-[0.3em] uppercase italic cursor-pointer text-[#E2725B]">Wine Scholar</h1>
         </div>
       </nav>
 
-      <main className="p-6 max-w-5xl mx-auto">
+      <main className="px-8 py-12 max-w-7xl mx-auto">
         
-        {/* VIEW: HOME */}
+        {/* VIEW: HOME (WORLD ATLAS) */}
         {view === 'home' && (
           <div className="animate-fadeIn">
-            <h2 className="text-5xl font-serif mb-4 italic text-[#C6AC8F]">Global Terroir</h2>
-            <p className="text-slate-500 mb-12 uppercase tracking-widest text-[10px] font-black italic">Select a country to explore the map</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="mb-20">
+              <h2 className="text-8xl font-serif italic mb-6">World Terroir.</h2>
+              <p className="text-slate-500 max-w-xl uppercase tracking-widest text-xs leading-loose">A comprehensive technical index of global viticultural regions and their legal production standards.</p>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               {REGIONS_DATA.map(country => (
-                <div key={country.id} onClick={() => navigate('country', country)} className="group p-10 bg-[#161616] rounded-[3.5rem] border border-white/5 hover:border-[#E2725B]/40 cursor-pointer transition-all hover:scale-[1.02]">
-                  <h3 className="text-4xl font-bold group-hover:text-[#E2725B] transition-colors">{country.name}</h3>
-                  <p className="text-[#A9927D] mt-3 text-lg leading-relaxed">{country.description}</p>
+                <div key={country.id} onClick={() => navigate('country', country)} className="group relative p-12 bg-[#111] rounded-[4rem] border border-white/5 hover:border-[#E2725B]/30 cursor-pointer transition-all">
+                  <span className="text-[10px] font-black text-[#E2725B] uppercase tracking-widest mb-4 block">Archive_{country.id}</span>
+                  <h3 className="text-5xl font-bold mb-4 group-hover:translate-x-2 transition-transform">{country.name}</h3>
+                  <p className="text-[#A9927D] text-lg leading-relaxed">{country.description}</p>
                 </div>
               ))}
             </div>
           </div>
         )}
 
-        {/* VIEW: COUNTRY */}
+        {/* VIEW: COUNTRY (APPELLATION LIST) */}
         {view === 'country' && activeCountry && (
           <div className="animate-fadeIn">
-            <button onClick={() => navigate('home')} className="text-[#E2725B] font-bold mb-8 text-[10px] uppercase tracking-[0.3em]">← Back to Map</button>
-            <h2 className="text-8xl font-serif mb-16 opacity-90">{activeCountry.name}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <button onClick={() => navigate('home')} className="text-[#E2725B] font-black text-[10px] uppercase tracking-[0.3em] mb-12 hover:pl-2 transition-all">← Back to Atlas</button>
+            <h2 className="text-9xl font-serif mb-20">{activeCountry.name}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {activeCountry.subRegions.map(reg => (
-                <div key={reg.id} onClick={() => navigate('region', activeCountry, reg)} className="p-10 bg-[#1a1a1a] rounded-[2.5rem] border-l-4 border-[#E2725B] hover:bg-[#222] cursor-pointer transition-all">
-                  <h4 className="text-3xl font-bold mb-2">{reg.name}</h4>
-                  <p className="text-xs text-slate-500 italic">Explore regional styles →</p>
+                <div key={reg.id} onClick={() => navigate('region', activeCountry, reg)} className="p-10 bg-[#111] rounded-[3rem] border border-white/5 hover:bg-[#161616] cursor-pointer transition-all border-b-4 border-b-[#E2725B]/20">
+                  <h4 className="text-2xl font-bold mb-4">{reg.name}</h4>
+                  <p className="text-xs text-slate-500 uppercase tracking-widest">Access Tech Specs →</p>
                 </div>
               ))}
             </div>
           </div>
         )}
 
-        {/* VIEW: REGION */}
+        {/* VIEW: REGION (TECHNICAL DEEP DIVE) */}
         {view === 'region' && activeRegion && (
-          <div className="animate-fadeIn pb-20">
-            <button onClick={() => navigate('country', activeCountry)} className="text-[#E2725B] font-bold mb-8 text-[10px] uppercase tracking-[0.3em]">← {activeCountry.name}</button>
-            <h2 className="text-7xl font-serif text-[#E2725B] mb-8 italic">{activeRegion.name}</h2>
-            <div className="max-w-2xl bg-white/5 p-8 rounded-[2rem] border border-white/5 mb-16">
-                <p className="text-xl text-[#C6AC8F] italic leading-relaxed">{activeRegion.methods}</p>
-            </div>
+          <div className="animate-fadeIn">
+            <header className="mb-20 border-b border-white/5 pb-20">
+              <button onClick={() => navigate('country', activeCountry)} className="text-[#E2725B] font-black text-[10px] uppercase tracking-[0.3em] mb-8">← {activeCountry.name}</button>
+              <h2 className="text-8xl font-serif text-[#E2725B] italic mb-8">{activeRegion.name}</h2>
+              <div className="max-w-3xl">
+                <p className="text-2xl text-[#C6AC8F] italic font-serif leading-relaxed mb-6">"{activeRegion.methods}"</p>
+              </div>
+            </header>
             
-            <div className="grid grid-cols-1 gap-12">
+            <div className="grid grid-cols-1 gap-20">
               {WINE_LIBRARY[activeRegion.id]?.map((wine, i) => (
-                <div key={i} className="bg-[#161616] rounded-[4rem] p-12 border border-white/5 shadow-2xl group overflow-hidden relative">
-                  <div className="absolute top-0 right-0 p-8 text-white/5 text-8xl font-black">{i+1}</div>
-                  <div className="relative z-10">
-                    <h3 className="text-5xl font-bold mb-4">{wine.name}</h3>
+                <div key={i} className="group grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                  <div className="lg:col-span-7">
+                    <span className="text-[10px] font-black text-slate-600 mb-4 block uppercase tracking-widest">Entry 00{i+1}</span>
+                    <h3 className="text-6xl font-bold mb-6">{wine.name}</h3>
                     <button 
                       onClick={() => handleGrapeClick(wine.grape)}
-                      className="px-5 py-2 bg-[#E2725B]/10 rounded-full border border-[#E2725B]/30 text-[#E2725B] font-mono text-xs uppercase tracking-widest mb-10 hover:bg-[#E2725B] hover:text-white transition-all"
+                      className="px-6 py-2 bg-white/5 border border-white/10 rounded-full text-[#E2725B] font-mono text-xs uppercase tracking-widest mb-8 hover:bg-[#E2725B] hover:text-white transition-all"
                     >
-                      {wine.grape} • View DNA 🧬
+                      DNA: {wine.grape}
                     </button>
-                    <p className="text-2xl text-[#C6AC8F] italic leading-relaxed mb-10">"{wine.pro}"</p>
+                    <p className="text-2xl text-[#F4F1DE] font-serif leading-relaxed italic opacity-80 mb-10">"{wine.pro}"</p>
                     
                     {wine.subTypes && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {wine.subTypes.map((t, idx) => (
-                                <div key={idx} className="bg-black/40 p-5 rounded-2xl border border-white/5">
-                                    <span className="block font-black text-[#E2725B] text-[10px] uppercase tracking-widest mb-1">{t.level}</span>
-                                    <span className="text-sm text-[#F4F1DE] italic">{t.rule}</span>
-                                </div>
-                            ))}
-                        </div>
+                      <div className="space-y-4">
+                        {wine.subTypes.map((t, idx) => (
+                          <div key={idx} className="flex items-start gap-6 p-6 bg-white/[0.02] rounded-2xl border border-white/5">
+                            <span className="text-[#E2725B] font-black text-[10px] uppercase pt-1 shrink-0">{t.level}</span>
+                            <span className="text-sm text-[#A9927D] italic leading-relaxed">{t.rule}</span>
+                          </div>
+                        ))}
+                      </div>
                     )}
+                  </div>
+
+                  <div className="lg:col-span-5 bg-[#111] p-10 rounded-[3rem] border border-white/5 sticky top-32">
+                    <p className="text-[10px] font-black text-[#E2725B] uppercase tracking-[0.4em] mb-8">Technical Specification</p>
+                    {wine.tech_specs ? Object.entries(wine.tech_specs).map(([label, val]) => (
+                      <div key={label} className="mb-8 last:mb-0">
+                        <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest mb-2">{label.replace('_', ' ')}</p>
+                        <p className="text-sm text-[#C6AC8F] leading-relaxed">{val}</p>
+                      </div>
+                    )) : <p className="text-xs text-slate-600 italic">Advanced tech specs for this appellation are being finalized.</p>}
                   </div>
                 </div>
               ))}
@@ -188,36 +168,58 @@ export default function App() {
           </div>
         )}
 
-        {/* VIEW: GRAPES */}
+        {/* VIEW: GRAPE GENETICS */}
         {view === 'grapes' && (
           <div className="animate-fadeIn">
-            <h2 className="text-7xl font-serif mb-4 text-[#E2725B] italic">Grape DNA</h2>
-            <p className="text-[#C6AC8F] mb-20 text-xl border-l border-[#E2725B] pl-6">The molecular characteristics and flavor profiles of the world's noble varieties.</p>
-            <div className="space-y-32">
+            <h2 className="text-9xl font-serif mb-6 italic text-[#E2725B]">Genetics</h2>
+            <p className="text-xl text-[#C6AC8F] mb-24 border-l-2 border-[#E2725B] pl-8 max-w-2xl">The technical pedigree and chemical analysis of the world's noble varieties.</p>
+            
+            <div className="space-y-40">
               {GRAPES_DATA.map(grape => (
-                <div key={grape.id} id={grape.id} className="grid grid-cols-1 md:grid-cols-2 gap-16 scroll-mt-32 border-b border-white/5 pb-32">
-                  <div>
-                    <h3 className="text-6xl font-bold mb-4">{grape.name}</h3>
-                    <p className="text-[#E2725B] font-mono text-xs uppercase tracking-widest mb-8 italic">{grape.origin} • {grape.style}</p>
-                    <p className="text-xl text-[#F4F1DE] font-serif leading-relaxed mb-8 italic opacity-80">"{grape.summary}"</p>
-                    <p className="text-[#A9927D] leading-relaxed mb-10 text-lg">{grape.description}</p>
-                    <div className="flex flex-wrap gap-3">
-                      {grape.flavors.map(f => (
-                        <span key={f} className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-black uppercase tracking-widest text-[#C6AC8F]">{f}</span>
-                      ))}
+                <div key={grape.id} id={grape.id} className="grid grid-cols-1 lg:grid-cols-12 gap-16 scroll-mt-32">
+                  <div className="lg:col-span-7">
+                    <h3 className="text-7xl font-bold mb-4">{grape.name}</h3>
+                    <p className="text-[#E2725B] font-mono text-xs uppercase tracking-[0.3em] mb-10">{grape.origin} • {grape.style}</p>
+                    <p className="text-2xl text-[#F4F1DE] font-serif italic mb-8 opacity-90 leading-relaxed">"{grape.summary}"</p>
+                    <p className="text-[#A9927D] text-lg leading-relaxed mb-12">{grape.description}</p>
+                    
+                    <div className="bg-[#111] p-10 rounded-[3rem] border border-white/5">
+                      <p className="text-[10px] font-black text-[#E2725B] uppercase tracking-[0.4em] mb-8">Pedigree & Viticulture</p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        {grape.technical && Object.entries(grape.technical).map(([key, value]) => (
+                          <div key={key}>
+                            <p className="text-[9px] uppercase text-slate-500 font-black mb-2 tracking-widest">{key.replace('_', ' ')}</p>
+                            <p className="text-sm text-[#C6AC8F] leading-relaxed">{value}</p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                  <div className="bg-[#161616] p-12 rounded-[4rem] border border-white/5 shadow-2xl h-fit sticky top-32">
+
+                  <div className="lg:col-span-5 bg-[#111] p-12 rounded-[4rem] border border-white/5 h-fit sticky top-32">
+                    <p className="text-[10px] font-black text-[#E2725B] uppercase tracking-[0.4em] mb-12">Phenolic Analysis</p>
                     <PowerBar label="Acidity" level={grape.stats.acidity} />
                     <PowerBar label="Tannin" level={grape.stats.tannin} />
                     <PowerBar label="Body" level={grape.stats.body} />
                     <PowerBar label="Alcohol" level={grape.stats.alcohol} />
+                    
+                    <div className="mt-12 pt-10 border-t border-white/5">
+                      <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-6">Aromatic Profile</p>
+                      <div className="flex flex-wrap gap-3">
+                        {grape.flavors.map(f => (
+                          <span key={f} className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-[#C6AC8F]">
+                            {f}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
         )}
+
       </main>
     </div>
   );
