@@ -1,58 +1,52 @@
-export const WINE_DATA = [
+export const REGIONS_DATA = [
   {
-    id: "fr-01",
-    name: "Barolo",
-    region: "Piedmont, Italy",
-    grape: "Nebbiolo",
-    tier: "Elite / Pro",
-    basic: "Powerful, high-tannin red that smells like roses and tar.",
-    proIntel: "Known as the 'King of Wines'. It looks light (like Pinot) but has massive grip. Always high acid.",
-    science: "Aged for at least 38 months (18 in wood). The tannins come from the thick skins of Nebbiolo grapes.",
-    tags: ["Italy", "Red", "High Tannin", "Piedmont"]
+    id: "italy",
+    name: "Italy",
+    description: "The land of 1,000 grapes. Focus on acid and structure.",
+    subRegions: [
+      {
+        name: "Piedmont",
+        climate: "Cool, foggy continental",
+        methods: "Long maceration (skin contact), aging in large 'Botte' (old oak).",
+        wines: [
+          { name: "Barolo", grape: "Nebbiolo", profile: "High Tannin, Roses, Tar", pro: "Needs 10+ years to soften. The 'King'." },
+          { name: "Gavi", grape: "Cortese", profile: "Crisp, Lime, Peachy", pro: "The Chablis of Italy." }
+        ]
+      },
+      {
+        name: "Tuscany",
+        climate: "Warm Mediterranean",
+        methods: "Sangiovese-led blends. Use of French Barrique in 'Super Tuscans'.",
+        wines: [
+          { name: "Brunello", grape: "Sangiovese Grosso", profile: "Bold, Earthy, Espresso", pro: "Must be 100% Sangiovese by law." },
+          { name: "Chianti Classico", grape: "Sangiovese", profile: "Sour Cherry, Herbs", pro: "Look for the Gallo Nero (Black Rooster)." }
+        ]
+      }
+    ]
   },
   {
-    id: "fr-02",
-    name: "Chablis",
-    region: "Burgundy, France",
-    grape: "Chardonnay",
-    tier: "Essential",
-    basic: "Bone-dry, crisp white. Tastes like green apple and 'stones'.",
-    proIntel: "Strictly unoaked. This is Chardonnay in its purest, leanest form. High minerality.",
-    science: "The soil in Chablis (Kimmeridgian) is full of ancient crushed oyster shells, giving the wine a salty/mineral taste.",
-    tags: ["France", "White", "Burgundy", "Mineral"]
-  },
-  {
-    id: "au-01",
-    name: "Barossa Shiraz",
-    region: "South Australia",
-    grape: "Shiraz",
-    tier: "Essential",
-    basic: "Big, bold, fruit-bomb red. Dark chocolate and pepper.",
-    proIntel: "Australia's signature style. Very high alcohol and intense flavor. Crowd pleaser.",
-    science: "Warm climate viticulture leads to high sugar in grapes, which ferment into high alcohol (14.5%+).",
-    tags: ["Australia", "Red", "Bold", "Barossa"]
-  },
-  {
-    id: "fr-03",
-    name: "Sancerre",
-    region: "Loire Valley, France",
-    grape: "Sauvignon Blanc",
-    tier: "Essential",
-    basic: "The world's most elegant Sauvignon Blanc. Citrus and flint.",
-    proIntel: "Much less 'tropical' than New Zealand. It’s about acidity and elegance.",
-    science: "Grown in 'Silex' (flint) soil, which helps the wine retain heat and develop smoky, mineral aromas.",
-    tags: ["France", "White", "Loire", "Acid"]
-  },
-  {
-    id: "sp-01",
-    name: "Rioja Reserva",
-    region: "Rioja, Spain",
-    grape: "Tempranillo",
-    tier: "Classic",
-    basic: "Silky red with flavors of dried cherry and vanilla toast.",
-    proIntel: "The 'Vanilla' flavor comes from American Oak barrels, a tradition in Rioja.",
-    science: "Reserva must be aged for 3 years, with at least 1 year in oak. This softens the tannins into a silky texture.",
-    tags: ["Spain", "Red", "Oak", "Tempranillo"]
+    id: "france",
+    name: "France",
+    description: "The global benchmark for 'Terroir' and technique.",
+    subRegions: [
+      {
+        name: "Burgundy",
+        climate: "Cool Continental",
+        methods: "Malolactic fermentation (creates buttery feel), Small parcel farming.",
+        wines: [
+          { name: "Chablis", grape: "Chardonnay", profile: "Flint, Green Apple", pro: "Kimmeridgian limestone soil is key." },
+          { name: "Côte d'Or", grape: "Pinot Noir", profile: "Silk, Raspberry, Mushroom", pro: "The most expensive soil on earth." }
+        ]
+      },
+      {
+        name: "Bordeaux",
+        climate: "Maritime (Atlantic influence)",
+        methods: "The 'Assemblage' (Blending) method. Heavy use of new French Oak.",
+        wines: [
+          { name: "Left Bank", grape: "Cabernet Lead", profile: "Graphite, Cedar, Power", pro: "Structured by the gravel soils of Médoc." },
+          { name: "Right Bank", grape: "Merlot Lead", profile: "Plum, Velvet, Soft", pro: "Clay soils make Merlot plush and rich." }
+        ]
+      }
+    ]
   }
-  // This list can be expanded to 1000+ entries easily
 ];
