@@ -3,110 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wine Hustle Pro</title>
+    <title>Wine Manager Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
-        .perspective-1000 { perspective: 1000px; }
-        .backface-hidden { backface-visibility: hidden; }
-        .rotate-y-180 { transform: rotateY(180deg); }
-        .transform-style-3d { transform-style: preserve-3d; }
-        body { background-color: #0f172a; }
-        .wine-gradient { background: linear-gradient(135deg, #540b0e 0%, #9e2a2b 100%); }
+        body { background-color: #0f172a; color: white; font-family: sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .active-tab { border-bottom: 3px solid #f59e0b; color: #f59e0b; }
     </style>
 </head>
 <body>
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState, useMemo } = React;
 
-        const wineData = [
-            {
-                id: 1,
-                title: "Level 1: The Essentials",
-                cards: [
-                    { title: "Sauvignon Blanc", hook: "Zesty & Sharp", body: "Light White", basic: "Tastes like lime and grass. Very high acid (makes mouth water).", pro: "Best from Marlborough (NZ) or Sancerre (FR). Pair with goat cheese or salads.", img: "https://images.unsplash.com/photo-1510850438481-194fef2c5d5d?auto=format&fit=crop&q=80&w=400" },
-                    { title: "Cabernet Sauvignon", hook: "The Heavyweight", body: "Full Red", basic: "High tannin (mouth drying). Tastes like blackcurrant and cedar.", pro: "The 'King' of grapes. Needs steak/fat to soften tannins. High aging potential.", img: "https://images.unsplash.com/photo-1553122912-78d9d511ea60?auto=format&fit=crop&q=80&w=400" }
-                ]
-            },
-            {
-                id: 2,
-                title: "Level 2: The Floor Hustle",
-                cards: [
-                    { title: "The Hand Test", hook: "Visualizing Body", body: "Technique", basic: "Pinky = Pinot Noir (Light). Middle = Merlot (Med). Thumb = Cabernet (Full).", pro: "Use this to explain 'mouthfeel' to customers. It’s the weight of the liquid.", img: "https://images.unsplash.com/photo-1547595628-c61a29f496f0?auto=format&fit=crop&q=80&w=400" },
-                    { title: "Acidity vs Tannin", hook: "The Core Duo", body: "Theory", basic: "Acid = Watering (side of tongue). Tannin = Drying (top of tongue/teeth).", pro: "High acid wines clean the palate from fried food. Tannins cut through animal protein.", img: "https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?auto=format&fit=crop&q=80&w=400" }
-                ]
-            }
+        const DATABASE = [
+            // ITALY
+            { name: "Barolo", region: "Piedmont, Italy", grape: "Nebbiolo", profile: "High Tannin & Acid", notes: "Smells of roses, tar, and dried cherries.", pro: "The 'King of Wines'. Very dry. Needs rich food like truffle pasta.", tags: ["Italy", "Red", "Pro"] },
+            { name: "Chianti Classico", region: "Tuscany, Italy", grape: "Sangiovese", profile: "High Acid, Med Tannin", notes: "Sour cherry, dried oregano, and balsamic.", pro: "Look for the 'Black Rooster' seal. The ultimate pizza/tomato sauce wine.", tags: ["Italy", "Red"] },
+            { name: "Brunello di Montalcino", region: "Tuscany, Italy", grape: "Sangiovese Grosso", profile: "Full Body, Power", notes: "Blackberry, leather, and chocolate.", pro: "Expensive and powerful. Decant for at least 1 hour before serving.", tags: ["Italy", "Red", "Luxury"] },
+            
+            // FRANCE
+            { name: "Chablis", region: "Burgundy, France", grape: "Chardonnay", profile: "Lean, Mineral, No Oak", notes: "Green apple, lemon, and oyster shell.", pro: "Unlike Cali-Chardonnay, this is NOT buttery. It tastes like 'rocks'. Best with Oysters.", tags: ["France", "White"] },
+            { name: "Bordeaux (Left Bank)", region: "Medoc, France", grape: "Cabernet Sauvignon Blend", profile: "Structured & Earthy", notes: "Graphite (pencil lead), blackcurrant, tobacco.", pro: "The world standard for fine red wine. Pairs with lamb and beef.", tags: ["France", "Red", "Pro"] },
+            { name: "Sancerre", region: "Loire Valley, France", grape: "Sauvignon Blanc", profile: "Sharp & Elegant", notes: "Citrus, flint, and white flowers.", pro: "The most famous Sauvignon Blanc in the world. High-end crowd favorite.", tags: ["France", "White"] },
+
+            // AUSTRALIA
+            { name: "Barossa Shiraz", region: "South Australia", grape: "Shiraz", profile: "Huge Body, Fruit Bomb", notes: "Blueberry jam, chocolate, and black pepper.", pro: "High alcohol (14.5%+). Thick and juicy. Very popular with casual drinkers.", tags: ["Australia", "Red"] },
+            { name: "Hunter Valley Semillon", region: "NSW, Australia", grape: "Semillon", profile: "Bone Dry, Low Alcohol", notes: "Lemon, lime, and toast (as it ages).", pro: "Australia's gift to the wine world. Tastes like 'lightning' when young.", tags: ["Australia", "White"] },
+            { name: "Margaret River Cab", region: "Western Australia", grape: "Cabernet Sauvignon", profile: "Refined & Herbal", notes: "Blackberry and bay leaf.", pro: "More 'French' in style than Barossa. Very elegant.", tags: ["Australia", "Red"] }
         ];
 
-        function Card({ card, onComplete }) {
-            const [flipped, setFlipped] = useState(false);
-            return (
-                <div className="w-full max-w-sm mx-auto h-[500px] perspective-1000 cursor-pointer" onClick={() => setFlipped(!flipped)}>
-                    <div className={`relative w-full h-full transition-transform duration-500 transform-style-3d ${flipped ? 'rotate-y-180' : ''}`}>
-                        {/* Front */}
-                        <div className="absolute w-full h-full backface-hidden bg-slate-800 rounded-3xl overflow-hidden border border-slate-700 shadow-2xl">
-                            <img src={card.img} className="h-48 w-full object-cover" />
-                            <div className="p-6 text-center">
-                                <span className="text-red-400 text-xs font-bold uppercase tracking-widest">{card.body}</span>
-                                <h2 className="text-3xl font-bold text-white mt-2">{card.title}</h2>
-                                <p className="text-slate-400 mt-4 italic">"{card.hook}"</p>
-                                <p className="text-slate-200 mt-4 text-lg">{card.basic}</p>
-                                <div className="mt-8 text-amber-500 animate-pulse text-sm font-bold">TAP TO LEARN PRO INFO 🔄</div>
-                            </div>
-                        </div>
-                        {/* Back */}
-                        <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-red-950 rounded-3xl border border-red-500 shadow-2xl flex flex-col items-center justify-center p-8 text-center">
-                            <h3 className="text-amber-500 font-bold uppercase mb-4 tracking-tighter">Pro Intelligence</h3>
-                            <p className="text-white text-xl leading-relaxed mb-8">{card.pro}</p>
-                            <button onClick={(e) => {e.stopPropagation(); onComplete();}} className="bg-amber-500 text-black font-black py-4 px-8 rounded-full hover:scale-105 active:scale-95 transition-transform">GOT IT. NEXT →</button>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
+        const QUIZ_DATA = [
+            { q: "Which Italian wine is known as the 'King of Wines'?", a: ["Barolo", "Chianti", "Pinot Grigio"], correct: 0 },
+            { q: "A customer wants a buttery, oaky white. What is the grape?", a: ["Sauvignon Blanc", "Chardonnay", "Riesling"], correct: 1 },
+            { q: "What does Tannin feel like in the mouth?", a: ["Watery/Sour", "Drying/Gripping", "Burning/Hot"], correct: 1 }
+        ];
 
         function App() {
-            const [level, setLevel] = useState(0);
-            const [cardIdx, setCardIdx] = useState(null);
+            const [view, setView] = useState('explore');
+            const [search, setSearch] = useState('');
+            const [quizIdx, setQuizIdx] = useState(0);
 
-            if (cardIdx !== null) {
-                return (
-                    <div className="min-h-screen flex items-center justify-center p-4">
-                        <div className="w-full">
-                            <button onClick={() => setCardIdx(null)} className="text-slate-500 mb-4 font-bold">← EXIT LEVEL</button>
-                            <Card 
-                                card={wineData[level].cards[cardIdx]} 
-                                onComplete={() => {
-                                    if (cardIdx < wineData[level].cards.length - 1) setCardIdx(cardIdx + 1);
-                                    else { setCardIdx(null); if(level < wineData.length - 1) setLevel(level + 1); }
-                                }} 
-                            />
-                        </div>
-                    </div>
-                );
-            }
+            const filtered = DATABASE.filter(w => 
+                w.name.toLowerCase().includes(search.toLowerCase()) || 
+                w.region.toLowerCase().includes(search.toLowerCase()) ||
+                w.tags.some(t => t.toLowerCase().includes(search.toLowerCase()))
+            );
 
             return (
-                <div className="max-w-md mx-auto p-6 text-white min-h-screen">
-                    <header className="py-10 text-center">
-                        <h1 className="text-5xl font-black italic tracking-tighter text-amber-500">WINE HUSTLE</h1>
-                        <p className="text-slate-400 mt-2 font-mono uppercase text-xs">80/20 Management Training</p>
+                <div className="max-w-2xl mx-auto min-h-screen p-4 pb-24">
+                    <header className="py-6 text-center">
+                        <h1 className="text-3xl font-bold text-amber-500">WINE MANAGER PRO</h1>
                     </header>
-                    <div className="space-y-4">
-                        {wineData.map((lvl, i) => (
-                            <div key={lvl.id} onClick={() => i <= level && setCardIdx(0)} className={`p-6 rounded-2xl border-2 transition-all ${i <= level ? 'bg-slate-800 border-amber-500/50 cursor-pointer' : 'bg-slate-900 border-slate-800 opacity-40 cursor-not-allowed'}`}>
-                                <div className="flex justify-between items-center">
-                                    <h2 className="text-xl font-bold">{lvl.title}</h2>
-                                    <span>{i < level ? '✅' : (i === level ? '🔓' : '🔒')}</span>
-                                </div>
-                            </div>
-                        ))}
+
+                    {/* Navigation */}
+                    <div className="flex justify-around mb-8 border-b border-gray-700">
+                        <button onClick={() => setView('explore')} className={`pb-2 px-4 ${view === 'explore' ? 'active-tab' : ''}`}>EXPLORE</button>
+                        <button onClick={() => setView('quiz')} className={`pb-2 px-4 ${view === 'quiz' ? 'active-tab' : ''}`}>TRAINING</button>
                     </div>
+
+                    {view === 'explore' ? (
+                        <div className="animate__animated animate__fadeIn">
+                            <input 
+                                type="text" 
+                                placeholder="Search regions (Italy, France), grapes, or wine name..." 
+                                className="w-full p-4 rounded-xl bg-gray-800 border border-gray-700 mb-6 focus:border-amber-500 outline-none"
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
+                            
+                            <div className="space-y-4">
+                                {filtered.map(wine => (
+                                    <div key={wine.name} className="glass p-6 rounded-2xl">
+                                        <div className="flex justify-between items-start mb-2">
+                                            <h3 className="text-xl font-bold text-white">{wine.name}</h3>
+                                            <span className="text-xs bg-amber-500/20 text-amber-500 px-2 py-1 rounded tracking-tighter uppercase font-bold">{wine.region}</span>
+                                        </div>
+                                        <p className="text-sm text-gray-400 mb-4"><strong>Grape:</strong> {wine.grape} | <strong>Body:</strong> {wine.profile}</p>
+                                        <div className="bg-white/5 p-3 rounded-lg border-l-4 border-amber-500 italic text-gray-200">
+                                            {wine.pro}
+                                        </div>
+                                        <p className="mt-3 text-sm">📝 {wine.notes}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="text-center py-10 glass rounded-3xl p-8">
+                            <h2 className="text-xl mb-6">{QUIZ_DATA[quizIdx].q}</h2>
+                            <div className="space-y-3">
+                                {QUIZ_DATA[quizIdx].a.map((opt, i) => (
+                                    <button 
+                                        key={i}
+                                        onClick={() => {
+                                            if(i === QUIZ_DATA[quizIdx].correct) {
+                                                alert("Correct!");
+                                                if(quizIdx < QUIZ_DATA.length - 1) setQuizIdx(quizIdx + 1);
+                                                else setQuizIdx(0);
+                                            } else {
+                                                alert("Try again!");
+                                            }
+                                        }}
+                                        className="w-full p-4 rounded-xl bg-gray-800 hover:bg-amber-600 transition-colors font-bold"
+                                    >
+                                        {opt}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    )}
                 </div>
             );
         }
