@@ -2,86 +2,150 @@ export const REGIONS_DATA = [
   {
     id: "italy",
     name: "Italy",
-    description: "The land of acidity and tradition.",
+    description: "The land of 1,000 grapes and volcanic energy.",
     subRegions: [
       { 
-        name: "Tuscany", 
-        methods: "Sangiovese-led blends. Use of French Barrique in 'Super Tuscans'.", 
+        name: "Piedmont", 
+        methods: "Long maceration in neutral Botte oak.", 
         wines: [
-          {name: "Chianti Classico", grape: "Sangiovese", pro: "The 'Black Rooster'. High acid, cherry, oregano."},
-          {name: "Brunello di Montalcino", grape: "Sangiovese", pro: "Power & Longevity. Must be 100% Sangiovese."},
-          {name: "Rosso di Montalcino", grape: "Sangiovese", pro: "The 'Baby Brunello'. Fresher and younger."},
-          {name: "Bolgheri / Super Tuscan", grape: "Cabernet Blend", pro: "Coastal Tuscany. Modern, international style."},
-          {name: "Vino Nobile di Montepulciano", grape: "Sangiovese", pro: "Elegant, 'Noble' style from high altitude."},
-          {name: "Vernaccia di San Gimignano", grape: "Vernaccia", pro: "Tuscany's most famous white. Crisp and nutty."},
-          {name: "Vin Santo", grape: "Trebbiano/Grechetto", pro: "Sweet 'Holy Wine'. Served with biscotti."}
+          {name: "Barolo", grape: "Nebbiolo", pro: "The King. Decant 1hr. Powerful tannins.", food: ["Steak", "Truffle"] },
+          {name: "Barbaresco", grape: "Nebbiolo", pro: "The Queen. Elegant, floral, and softer.", food: ["Duck", "Mushroom"] },
+          {name: "Gavi", grape: "Cortese", pro: "Bone-dry white. Flinty and almond notes.", food: ["Seafood", "Pesto"] }
         ] 
       },
       { 
-        name: "Piedmont", 
-        methods: "Long maceration, large oak aging.", 
+        name: "Tuscany", 
+        methods: "Sangiovese-led blends on clay-schist soils.", 
         wines: [
-          {name: "Barolo", grape: "Nebbiolo", pro: "The King. Tannic, rose, and tar notes."},
-          {name: "Barbaresco", grape: "Nebbiolo", pro: "The Queen. More elegant and approachable."},
-          {name: "Barbera d'Asti", grape: "Barbera", pro: "High acid, low tannin. The 'everyday' red."},
-          {name: "Dolcetto d'Alba", grape: "Dolcetto", pro: "Blackberry and almond. Soft and easy."},
-          {name: "Gavi", grape: "Cortese", pro: "Bone-dry, flinty white. Italy's Chablis."},
-          {name: "Moscato d'Asti", grape: "Moscato", pro: "Sweet, low alcohol, fizzy."}
+          {name: "Brunello", grape: "Sangiovese", pro: "Power and longevity. 100% Sangiovese.", food: ["Roasted Lamb", "Steak"] },
+          {name: "Chianti Classico", grape: "Sangiovese", pro: "Sour cherry and dried herbs. High acid.", food: ["Pizza", "Pasta"] },
+          {name: "Bolgheri", grape: "Cabernet Blend", pro: "Super Tuscans. Modern, plush, and prestigious.", food: ["Steak"] }
+        ] 
+      },
+      { 
+        name: "Veneto", 
+        methods: "Appassimento (drying grapes) for intensity.", 
+        wines: [
+          {name: "Amarone", grape: "Corvina Blend", pro: "Full-bodied (15%+). Dried fruit and chocolate.", food: ["Blue Cheese", "Venison"] },
+          {name: "Prosecco", grape: "Glera", pro: "Fresh bubbles, peach and pear notes.", food: ["Aperitivo", "Light Snacks"] }
         ] 
       }
-      // ... I will provide the rest of the countries below in a similar format
+    ]
+  },
+  {
+    id: "france",
+    name: "France",
+    description: "The global benchmark for Terroir and elegance.",
+    subRegions: [
+      { 
+        name: "Burgundy", 
+        methods: "Single vineyard focus (Climats).", 
+        wines: [
+          {name: "Chablis", grape: "Chardonnay", pro: "No oak. Pure mineral and oyster shell.", food: ["Oysters", "White Fish"] },
+          {name: "Meursault", grape: "Chardonnay", pro: "Rich, buttery, and prestigious white.", food: ["Lobster", "Chicken"] },
+          {name: "Gevrey-Chambertin", grape: "Pinot Noir", pro: "Muscular, earthy, and gamey red.", food: ["Duck", "Game"] }
+        ] 
+      },
+      { 
+        name: "Bordeaux", 
+        methods: "Left Bank (Gravel) vs Right Bank (Clay).", 
+        wines: [
+          {name: "Pauillac", grape: "Cabernet Sauvignon", pro: "Left Bank icon. Pencil lead and cedar.", food: ["Steak", "Lamb"] },
+          {name: "St-Émilion", grape: "Merlot", pro: "Right Bank. Velvet, plum, and chocolate.", food: ["Beef Stew", "Hard Cheese"] }
+        ] 
+      },
+      { 
+        name: "Rhône", 
+        methods: "Steep granite hills (North) vs Stony plains (South).", 
+        wines: [
+          {name: "Hermitage", grape: "Syrah", pro: "Smoky, meaty, and world-class Syrah.", food: ["Steak", "Black Pepper dishes"] },
+          {name: "Châteauneuf-du-Pape", grape: "Grenache Blend", pro: "Spicy, bold, and high alcohol.", food: ["BBQ", "Spicy Sausage"] }
+        ] 
+      }
+    ]
+  },
+  {
+    id: "germany",
+    name: "Germany",
+    description: "Extreme cool-climate viticulture and steep slopes.",
+    subRegions: [
+      { 
+        name: "Mosel", 
+        methods: "Blue slate soil and very steep river banks.", 
+        wines: [
+          {name: "Mosel Riesling", grape: "Riesling", pro: "Electric acidity, low alcohol, slate mineral.", food: ["Thai Food", "Spicy Fish"] },
+          {name: "Kabinett Riesling", grape: "Riesling", pro: "Off-dry and light. Perfect balance of sugar/acid.", food: ["Spicy Food"] }
+        ] 
+      },
+      { 
+        name: "Rheingau", 
+        methods: "South-facing slopes, fuller-bodied styles.", 
+        wines: [
+          {name: "Dry Riesling", grape: "Riesling", pro: "Powerful, structured, and bone-dry.", food: ["Pork", "Roasted Vegetables"] }
+        ] 
+      },
+      { 
+        name: "Pfalz", 
+        methods: "Warmer climate, diverse soil types.", 
+        wines: [
+          {name: "Spätburgunder", grape: "Pinot Noir", pro: "Germany's best red. Elegant and savory.", food: ["Chicken", "Mushrooms"] }
+        ] 
+      }
     ]
   },
   {
     id: "spain",
     name: "Spain",
-    description: "Traditional oak aging and high-altitude desert climates.",
+    description: "High altitude, ancient vines, and oak mastery.",
     subRegions: [
-      {
-        name: "Rioja",
-        methods: "Graded by aging: Crianza, Reserva, Gran Reserva.",
+      { 
+        name: "Rioja", 
+        methods: "American Oak aging for vanilla notes.", 
         wines: [
-          {name: "Rioja Reserva", grape: "Tempranillo", pro: "Vanilla and dill notes from American Oak."},
-          {name: "Rioja Blanco", grape: "Viura", pro: "Can be fresh or heavily oaked and nutty."},
-          {name: "Rosado", grape: "Garnacha", pro: "Bright, strawberry-focused rosés."}
-        ]
+          {name: "Rioja Reserva", grape: "Tempranillo", pro: "Vanilla, tobacco, and dried plum.", food: ["Lamb", "Iberico Ham"] }
+        ] 
       },
-      {
-        name: "Priorat",
-        methods: "Llicorella (black slate) soil. Low yielding old vines.",
+      { 
+        name: "Priorat", 
+        methods: "Black slate (Llicorella) soil.", 
         wines: [
-          {name: "Priorat Red", grape: "Garnacha/Cariñena", pro: "Powerful, mineral, and high alcohol."}
-        ]
-      },
-      {
-        name: "Rías Baixas",
-        methods: "Coastal Atlantic influence. Pergola vine training.",
-        wines: [
-          {name: "Albariño", grape: "Albariño", pro: "Salty, peachy, and zesty. Best with seafood."}
-        ]
+          {name: "Priorat Red", grape: "Garnacha Blend", pro: "Mineral, powerful, and intense.", food: ["Grilled Meats"] }
+        ] 
       }
     ]
   },
   {
-    id: "usa",
-    name: "USA",
-    description: "Bold fruit and technological precision.",
+    id: "new-world",
+    name: "New World",
+    description: "Australia, USA, New Zealand, and Argentina.",
     subRegions: [
-      {
-        name: "Napa Valley",
-        methods: "Volcanic soils and heavy French Oak usage.",
+      { 
+        name: "Napa Valley (USA)", 
+        methods: "Volcanic soil and heavy French Oak.", 
         wines: [
-          {name: "Napa Cabernet", grape: "Cabernet Sauvignon", pro: "Expensive, bold, and prestigious."},
-          {name: "Oakville / Rutherford", grape: "Cabernet Sauvignon", pro: "Known for 'Rutherford Dust' (earthy tannins)."},
-          {name: "Napa Chardonnay", grape: "Chardonnay", pro: "Full-bodied, buttery, and tropical."}
-        ]
+          {name: "Napa Cabernet", grape: "Cabernet Sauvignon", pro: "Bold fruit, expensive oak, prestigious.", food: ["Steak"] }
+        ] 
       },
-      {
-        name: "Oregon",
-        methods: "Cool climate, similar to Burgundy.",
+      { 
+        name: "Marlborough (NZ)", 
+        methods: "Cool maritime climate.", 
         wines: [
-          {name: "Willamette Valley", grape: "Pinot Noir", pro: "Earthier and lighter than California Pinot."}
-        ]
+          {name: "Sauvignon Blanc", grape: "Sauvignon Blanc", pro: "Passionfruit and grass notes. High acid.", food: ["Salad", "Goat Cheese"] }
+        ] 
+      },
+      { 
+        name: "Barossa (AUS)", 
+        methods: "Ironstone soil and ancient vines.", 
+        wines: [
+          {name: "Barossa Shiraz", grape: "Shiraz", pro: "Dark chocolate, plum, and spice.", food: ["BBQ", "Rich Stews"] }
+        ] 
+      },
+      { 
+        name: "Mendoza (ARG)", 
+        methods: "High altitude (1000m+) UV intensity.", 
+        wines: [
+          {name: "Malbec", grape: "Malbec", pro: "Velvety tannins and deep purple fruit.", food: ["Steak", "Empanadas"] }
+        ] 
       }
     ]
   }
