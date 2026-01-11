@@ -2,113 +2,121 @@ export const REGIONS_DATA = [
   {
     id: "italy",
     name: "Italy",
-    description: "Alpine peaks to volcanic islands.",
+    description: "The most complex wine nation on earth.",
     subRegions: [
       { 
         name: "Tuscany", 
-        methods: "Focus on Sangiovese aging and specific sub-zones.", 
+        methods: "Sangiovese focus. Terroir varies from coastal sands to inland limestone.", 
         wines: [
           { 
             name: "Chianti Family", grape: "Sangiovese", 
-            pro: "Italy's icon. Quality is based on geography and time in oak.",
+            pro: "Iconic acid and cherry. The Black Rooster (Classico) is the heart.",
             subTypes: [
-              { level: "Chianti DOCG", rule: "Basic, fresh, drink young." },
-              { level: "Classico", rule: "The historic hills. More mineral and soul." },
-              { level: "Riserva", rule: "Aged 24 months. Vanilla and spice notes." },
-              { level: "Gran Selezione", rule: "30 months aging. Estate fruit only." }
-            ]
+              { level: "Chianti DOCG", rule: "Fresh, simple, stainless steel aged." },
+              { level: "Classico", rule: "Historic zone. More mineral and elegance." },
+              { level: "Classico Riserva", rule: "24 mo aging. Spice and tobacco notes." },
+              { level: "Gran Selezione", rule: "30 mo aging. Single estate fruit only." }
+            ],
+            food: ["Pasta", "Pizza"]
           },
           { 
             name: "Brunello di Montalcino", grape: "Sangiovese Grosso", 
-            pro: "Masculine, powerful, and requires 5 years aging.",
+            pro: "Power, depth, and 5 years of required aging.",
             subTypes: [
-              { level: "Rosso di Montalcino", rule: "Younger, fresher 'Baby Brunello'." },
-              { level: "Brunello DOCG", rule: "Minimum 2 years in oak, 5 years total aging." }
-            ]
-          }
+              { level: "Rosso di Montalcino", rule: "Fresh, 1-year aged 'Baby Brunello'." },
+              { level: "Brunello DOCG", rule: "The legend. 2 years oak, 5 total." },
+              { level: "Brunello Riserva", rule: "6 years aging. Massive complexity." }
+            ],
+            food: ["Lamb", "Wild Boar"]
+          },
+          { name: "Vino Nobile di Montepulciano", grape: "Prugnolo Gentile", pro: "The 'Noble' wine. More floral than Brunello.", food: ["Roast Pork"] },
+          { name: "Bolgheri / Super Tuscan", grape: "Bordeaux Blend", pro: "Coastal power. Polished, oaky, and prestigious.", food: ["Ribeye"] },
+          { name: "Vernaccia di San Gimignano", grape: "Vernaccia", pro: "Tuscany's great white. Crisp and almond-toned.", food: ["White Fish"] }
         ] 
       },
       { 
-        name: "Piedmont", methods: "Nebbiolo specialists with long oak aging.", 
+        name: "Piedmont", methods: "Alpine cooling meets the 'Botte' (large oak) tradition.", 
         wines: [
-          { name: "Barolo", grape: "Nebbiolo", pro: "The King. High tannin, high acid. Needs age.", subTypes: [{level: "DOCG", rule: "Standard blend"}, {level: "Riserva", rule: "5 years aging"}] },
-          { name: "Barbaresco", grape: "Nebbiolo", pro: "The Queen. More elegant and floral.", subTypes: [{level: "DOCG", rule: "Standard"}, {level: "Riserva", rule: "4 years aging"}] }
+          { name: "Barolo", grape: "Nebbiolo", pro: "King of wines. Rose, tar, and high tannin.", subTypes: [{level: "Commune", rule: "e.g. La Morra (soft) vs Serralunga (power)"}, {level: "Riserva", rule: "5+ years aging"}], food: ["Truffle"] },
+          { name: "Barbaresco", grape: "Nebbiolo", pro: "Queen of wines. Softer tannins, more floral.", food: ["Duck"] },
+          { name: "Barbera d'Asti", grape: "Barbera", pro: "The everyday red. High acid, no tannin. Juicy.", food: ["Salumi"] },
+          { name: "Dolcetto d'Alba", grape: "Dolcetto", pro: "Easy-drinking, dark fruit, and bitter almond finish.", food: ["Pasta"] },
+          { name: "Gavi", grape: "Cortese", pro: "Bone-dry, lime, and flinty minerality.", food: ["Seafood"] },
+          { name: "Roero Arneis", grape: "Arneis", pro: "Peach, apricot, and medium body white.", food: ["Chicken"] }
         ] 
       },
-      { name: "Veneto", methods: "Appassimento technique.", wines: [{ name: "Amarone", grape: "Corvina Blend", pro: "Dried grapes. Intense and 15% alc.", subTypes: [{level: "Standard", rule: "2 years oak"}, {level: "Riserva", rule: "4 years oak"}] }] },
-      { name: "Sicily", methods: "Volcanic Mt. Etna.", wines: [{ name: "Etna Rosso", grape: "Nerello", pro: "Elegant/Smoky." }] },
-      { name: "Puglia", methods: "Intense sun.", wines: [{ name: "Primitivo", grape: "Primitivo", pro: "Bold and Jammy." }] },
-      { name: "Alto Adige", methods: "Alpine slopes.", wines: [{ name: "Pinot Grigio", grape: "Pinot Grigio", pro: "Mineral/Zesty." }] }
+      { 
+        name: "Veneto", methods: "Home of the drying room (Fruttaio) and the bubble.", 
+        wines: [
+          { name: "Amarone", grape: "Corvina Blend", pro: "Intense, raisinated fruit, and 15% alcohol.", food: ["Blue Cheese"] },
+          { name: "Valpolicella Ripasso", grape: "Corvina", pro: "The bridge between fresh and intense.", food: ["Beef Stew"] },
+          { name: "Soave Classico", grape: "Garganega", pro: "Volcanic white. Lemon and saline notes.", food: ["Risotto"] },
+          { name: "Prosecco Superiore", grape: "Glera", pro: "The hilly DOCG quality tier.", food: ["Aperitivo"] },
+          { name: "Bardolino", grape: "Corvina", pro: "Light, chilled red. Perfect for summer.", food: ["Fish"] }
+        ] 
+      },
+      { name: "Sicily", methods: "Volcanic Etna vs the hot plains.", wines: [{ name: "Etna Rosso", grape: "Nerello", pro: "The Mediterranean Burgundy." }, { name: "Nero d'Avola", grape: "Nero d'Avola", pro: "Dark, plummy, and sun-drenched." }, { name: "Grillo", grape: "Grillo", pro: "Zesty coastal white." }] }
     ]
   },
   {
     id: "france",
     name: "France",
-    description: "The global benchmark for Terroir.",
+    description: "The birthplace of 'Terroir' and the Appellation system.",
     subRegions: [
       { 
-        name: "Burgundy", methods: "Hierarchy based on specific soil plots.", 
+        name: "Burgundy", methods: "Mosaic of soil. Hierarchy is based on precise vineyard plots.", 
         wines: [
-          { 
-            name: "Côte d'Or", grape: "Pinot Noir / Chardonnay", 
-            pro: "Hierarchy moves from wide regions to tiny, expensive plots.",
-            subTypes: [
-              { level: "Regional", rule: "Entry level. Grapes from across Burgundy." },
-              { level: "Village", rule: "Specific town (e.g., Gevrey-Chambertin)." },
-              { level: "Premier Cru", rule: "High-quality specific vineyard slopes." },
-              { level: "Grand Cru", rule: "The Top 1%. Incredible power and aging." }
-            ]
-          }
+          { name: "Côte de Nuits (Red)", grape: "Pinot Noir", pro: "Earth, mushroom, and red fruit. The pinnacle of Pinot.", subTypes: [{level: "Village", rule: "e.g. Gevrey-Chambertin"}, {level: "Grand Cru", rule: "The Top 1%"}], food: ["Coq au Vin"] },
+          { name: "Côte de Beaune (White)", grape: "Chardonnay", pro: "Butter, hazelnut, and citrus complexity.", food: ["Lobster"] },
+          { name: "Chablis", grape: "Chardonnay", pro: "Unoaked 'Oyster-shell' minerality.", subTypes: [{level: "1er Cru", rule: "Classic stone fruit"}, {level: "Grand Cru", rule: "Richness and age"}], food: ["Oysters"] },
+          { name: "Beaujolais", grape: "Gamay", pro: "Light, fruity, and low tannin. Drink slightly chilled.", food: ["Charcuterie"] },
+          { name: "Mâconnais", grape: "Chardonnay", pro: "Affordable, sunny, and approachable white Burgundy.", food: ["Salads"] }
         ] 
       },
       { 
-        name: "Bordeaux", methods: "Left Bank (Cabernet) vs Right Bank (Merlot).", 
+        name: "Bordeaux", methods: "The battle of the Banks. Left (Gravel) vs Right (Clay).", 
         wines: [
-          { name: "Médoc", grape: "Cabernet Blend", pro: "Left Bank. Cedar, lead, structured.", subTypes: [{level: "Village", rule: "e.g. Pauillac"}, {level: "Cru Classé", rule: "Ranked since 1855"}] },
-          { name: "Saint-Émilion", grape: "Merlot Blend", pro: "Right Bank. Plush, plum, and soft." }
+          { name: "Pauillac", grape: "Cabernet", pro: "The icon of the Left Bank. Pencil lead and cedar.", food: ["Lamb"] },
+          { name: "Saint-Émilion", grape: "Merlot", pro: "The plush heart of the Right Bank. Plum and chocolate.", food: ["Roast Beef"] },
+          { name: "Sauternes", grape: "Sémillon/Sauvignon", pro: "Noble Rot dessert wine. Honey and apricot.", food: ["Foie Gras"] },
+          { name: "Pessac-Léognan", grape: "Sauvignon/Sémillon", pro: "The world's greatest dry oaked whites.", food: ["Scallops"] },
+          { name: "Margaux", grape: "Cabernet", pro: "The most floral and elegant of the Medoc.", food: ["Duck"] }
         ] 
       },
-      { name: "Champagne", methods: "Traditional Method bubbles.", wines: [{ name: "Champagne", grape: "Blend", pro: "Brioche and yeast notes.", subTypes: [{level: "Non-Vintage", rule: "Consistency"}, {level: "Vintage", rule: "Great years only"}, {level: "Prestige", rule: "The house's best"}] }] }
+      { name: "Rhône Valley", methods: "Northern Granite vs Southern Stones.", wines: [{ name: "Hermitage", grape: "Syrah", pro: "Smoky, meaty, and powerful." }, { name: "Châteauneuf-du-Pape", grape: "Grenache Blend", pro: "Rich, spicy, and warm." }, { name: "Condrieu", grape: "Viognier", pro: "Explosive apricot and honeysuckle white." }] }
     ]
   },
   {
-    id: "spain",
-    name: "Spain",
-    description: "Focus on American Oak aging categories.",
+    id: "usa",
+    name: "USA",
+    description: "Napa, Sonoma, and the Pacific Northwest.",
     subRegions: [
       { 
-        name: "Rioja", methods: "Classification by time spent in oak barrels.", 
+        name: "Napa Valley", methods: "Valley floor vs Mountain fruit styles.", 
         wines: [
-          { 
-            name: "Tempranillo", grape: "Tempranillo", 
-            pro: "The label color tells you the age and oak level.",
-            subTypes: [
-              { level: "Crianza", rule: "1 year in oak. Fresh and fruity." },
-              { level: "Reserva", rule: "3 years aging. Tobacco and leather." },
-              { level: "Gran Reserva", rule: "5 years aging. Developed and silky." }
-            ]
-          }
+          { name: "Oakville Cabernet", grape: "Cabernet", pro: "Perfect balance of power and velvety texture.", food: ["Steak"] },
+          { name: "Rutherford Cabernet", grape: "Cabernet", pro: "Famous for 'Rutherford Dust' earthy tannins.", food: ["Grilled Meats"] },
+          { name: "Stags Leap Cabernet", grape: "Cabernet", pro: "Soft, supple, and very elegant style.", food: ["Filet Mignon"] },
+          { name: "Mountain Fruit (Howell Mtn)", grape: "Cabernet", pro: "Inky, massive tannins, built for 20 years.", food: ["Venison"] },
+          { name: "Carneros Chardonnay", grape: "Chardonnay", pro: "Cooler climate. Apple and bright acid.", food: ["Chicken"] }
         ] 
-      }
+      },
+      { name: "Oregon", methods: "The 45th Parallel.", wines: [{ name: "Willamette Pinot", grape: "Pinot Noir", pro: "Elegant and earthy." }, { name: "Dundee Hills Pinot", grape: "Pinot Noir", pro: "Red fruit and iron-rich soil." }] }
     ]
   },
   {
-    id: "germany",
-    name: "Germany",
-    description: "Precision acidity and ripeness scales.",
+    id: "new-zealand",
+    name: "New Zealand",
+    description: "High intensity, high acid, and pure fruit.",
     subRegions: [
       { 
-        name: "Mosel", methods: "Blue slate soil and Pradikat ripeness scale.", 
+        name: "Marlborough", methods: "Ocean influence and gravelly riverbeds.", 
         wines: [
-          { 
-            name: "Riesling", grape: "Riesling", 
-            pro: "Electric acidity. Scale goes from bone-dry to sweet.",
-            subTypes: [
-              { level: "Kabinett", rule: "Light and off-dry." },
-              { level: "Spätlese", rule: "Late harvest, richer fruit." },
-              { level: "Auslese", rule: "Selected bunches, very intense." }
-            ]
-          }
+          { name: "Sauvignon Blanc", grape: "Sauvignon Blanc", pro: "Passionfruit and gooseberry explosion.", food: ["Goat Cheese"] },
+          { name: "Marlborough Chardonnay", grape: "Chardonnay", pro: "Citrus-driven and high energy white.", food: ["Seafood"] },
+          { name: "Pinot Noir", grape: "Pinot Noir", pro: "Lighter, red-fruit-focused style.", food: ["Salmon"] },
+          { name: "Riesling", grape: "Riesling", pro: "Lime zest and high-octane acidity.", food: ["Thai"] },
+          { name: "Pinot Gris", grape: "Pinot Gris", pro: "Off-dry, pear, and spice notes.", food: ["Indian"] }
         ] 
       }
     ]
