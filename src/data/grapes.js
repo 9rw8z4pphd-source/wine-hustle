@@ -1,50 +1,45 @@
+// src/data/grapes.js
 export const GRAPE_DB = {
-  "Nebbiolo": {
-    vibe: "The Tough Sophisticate",
-    color: "Translucent Garnet (looks like tea)",
-    body: "Heavy / High Tannin",
-    basic: "Smells like roses and old leather. Very dry.",
-    science: "Late ripening grape that needs specific limestone soils to develop its 'tar' aroma.",
-    proTip: "If a guest likes 'Bold' but wants something more elegant than Shiraz, this is it."
+  "Nebbiolo": { 
+    vibe: "The Tough Sophisticate", 
+    color: "Translucent Garnet", 
+    body: "Heavy Tannin / High Acid", 
+    basic: "Rose petals, tar, and sour cherry.", 
+    proTip: "Looks light like Pinot Noir, but has massive tannins. Essential to decant." 
   },
-  "Sangiovese": {
-    vibe: "The Italian Soul",
-    color: "Bright Ruby",
-    body: "Medium / High Acid",
-    basic: "Cherries, dried tomatoes, and herbs.",
-    science: "Thin skin means it reflects the earth easily (terroir). High acidity makes it the best food wine.",
-    proTip: "The #1 recommendation for anything with tomato sauce or balsamic."
+  "Sangiovese": { 
+    vibe: "The Italian Soul", 
+    color: "Ruby Red", 
+    body: "Medium / High Acid", 
+    basic: "Red cherry, roasted tomato, and dried oregano.", 
+    proTip: "The best food-pairing grape on earth due to its high acidity." 
   },
-  "Malbec": {
-    vibe: "The Velvet Hammer",
-    color: "Opaque Deep Purple (often with a magenta rim)",
-    body: "Full / Smooth",
-    basic: "Plum, blueberry, and milk chocolate.",
-    science: "Thrives in high altitudes (Argentina) where UV rays thicken the skins for deep color.",
-    proTip: "For the guest who wants 'Smooth and Dark' with no bitterness."
+  "Riesling": { 
+    vibe: "The Electric Aromatic", 
+    color: "Pale Straw", 
+    body: "Light Body / High Acid", 
+    basic: "Green apple, lime zest, and petrol (aged).", 
+    proTip: "Can be bone-dry or sweet. Use for spicy cuisines like Thai or Indian." 
   },
-  "Riesling": {
-    vibe: "The Electric White",
-    color: "Pale Straw / Green",
-    body: "Light / Intense Acid",
-    basic: "Lime, green apple, and sometimes 'petrol' (gasoline) smell.",
-    science: "Naturally high in tartaric acid. It’s the best wine for aging (can last 20+ years).",
-    proTip: "Perfect for spicy food (Thai/Indian) or guests who find Chardonnay too 'heavy'."
+  "Pinot Noir": { 
+    vibe: "The Earthy Elegant", 
+    color: "Pale Ruby", 
+    body: "Light Body / Low Tannin", 
+    basic: "Strawberry, mushroom, and forest floor.", 
+    proTip: "Cool-climate sites produce the most complex versions. Very site-sensitive." 
   },
-  "Cabernet Sauvignon": {
-    vibe: "The Boss",
-    color: "Deep Ruby / Black",
-    body: "Heavy / Structured",
-    basic: "Blackcurrant (Cassis), cedar wood, and bell pepper.",
-    science: "High levels of 'Pyrazines' give it that herbal/green pepper note.",
-    proTip: "The 'safe' choice for luxury. If they want a big steak wine, this is the gold standard."
+  "Chardonnay": { 
+    vibe: "The Winemaker's Canvas", 
+    color: "Gold", 
+    body: "Medium to Full Body", 
+    basic: "Lemon (unoaked) to Butter/Vanilla (oaked).", 
+    proTip: "Chablis is the purest, mineral form; Napa/Burgundy is the rich, oaked form." 
   },
-  "Tempranillo": {
-    vibe: "The Smooth Spaniard",
-    color: "Ruby Red",
-    body: "Medium-Full",
-    basic: "Leather, vanilla, tobacco, and red plums.",
-    science: "Low acidity compared to Sangiovese. Takes very well to American Oak (vanilla notes).",
-    proTip: "For people who find Cabernet too 'dry' but want something serious."
+  "Tempranillo": { 
+    vibe: "The Oak Master", 
+    color: "Deep Ruby", 
+    body: "Medium-Plus Body", 
+    basic: "Leather, tobacco, and vanilla.", 
+    proTip: "Spanish versions are famous for long aging in American oak barrels." 
   }
 };
