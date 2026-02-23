@@ -1,171 +1,205 @@
-// src/data/entities/lessons.js
-// Lessons are “content containers” that reference TERMS by id.
-// This makes your Academy scalable and later quiz-generation easy.
-
-export const LESSONS = {
-  tasting_level2: {
-    id: "tasting_level2",
-    title: "Tasting & Evaluating Wine (WSET L2)",
-    pillar: "academy",
-    read_time: "6–10 min",
-    term_ids: ["sat_intro", "appearance_out_of_condition", "quality_balance", "quality_finish", "quality_intensity", "quality_complexity"],
-    sections: [
-      {
-        title: "Why taste systematically?",
-        bullets: [
-          "Tasting (not just drinking) improves memory and communication.",
-          "A consistent structure helps compare wines fairly.",
-        ],
-      },
-      {
-        title: "SAT Flow",
-        bullets: [
-          "Appearance → Nose → Palate → Conclusion (Quality).",
-          "Use consistent glassware when comparing wines.",
-        ],
-      },
-      {
-        title: "Quality markers",
-        bullets: [
-          "Balance: components should work together.",
-          "Finish: longer can indicate quality.",
-          "Intensity + Complexity: more layers usually means higher quality.",
-        ],
-      },
-    ],
+export const TERMS = {
+  sat_intro: {
+    id: "sat_intro",
+    category: "Tasting",
+    title: "Systematic Approach to Tasting",
+    definition: "A repeatable framework used to assess appearance, nose, palate, and quality.",
+    bullets: ["Keeps evaluations consistent.", "Improves communication and comparison across wines."],
   },
-
-  food_pairing_core: {
-    id: "food_pairing_core",
-    title: "Wine & Food Pairing (WSET L2)",
-    pillar: "academy",
-    read_time: "7–12 min",
-    term_ids: [
-      "pairing_high_risk_foods",
-      "pairing_sugar_rule",
-      "pairing_umami_effects",
-      "pairing_acid_food_effects",
-      "pairing_salt_food_effects",
-      "pairing_bitterness_effects",
-      "pairing_chilli_heat",
-      "pairing_low_risk_foods",
-    ],
-    sections: [
-      {
-        title: "High-risk foods (tricky)",
-        bullets: ["Sugar, umami, bitterness, chilli heat create strong taste interactions."],
-      },
-      {
-        title: "Low-risk foods (easier)",
-        bullets: ["Salt and acid are usually pairing-friendly, but acid still needs acid in the wine."],
-      },
-      {
-        title: "Practical pairing approach",
-        bullets: [
-          "If dish is sweet → pick a wine at least as sweet.",
-          "If dish is umami-heavy → avoid harsh tannin; prefer fruity wines.",
-          "If chilli is high → keep tannin + alcohol lower; some sweetness/fruit helps.",
-        ],
-      },
-    ],
+  appearance_out_of_condition: {
+    id: "appearance_out_of_condition",
+    category: "Tasting",
+    title: "Out of Condition",
+    definition: "A wine with visible faults in appearance, nose, or palate that make it unsound.",
+    bullets: ["Cloudiness can indicate a fault.", "Oxidative color changes can be a warning sign."],
   },
-
-  climate_style_quality: {
-    id: "climate_style_quality",
-    title: "Climate, Weather & Style (WSET L2)",
-    pillar: "academy",
-    read_time: "6–10 min",
-    term_ids: ["climate_categories", "climate_hot_vs_cool", "weather_vintage"],
-    sections: [
-      {
-        title: "What controls climate?",
-        bullets: [
-          "Latitude (distance from the Equator) is the big driver.",
-          "Altitude cools a region even at the same latitude.",
-          "Oceans + currents can warm or cool coastal vineyards.",
-        ],
-      },
-      {
-        title: "Hot vs cool climate styles (general)",
-        bullets: [
-          "Hot: more alcohol, fuller body, more tannin, less acidity.",
-          "Cool: less alcohol, lighter body, less tannin, more acidity.",
-        ],
-      },
-      {
-        title: "Weather & vintage",
-        bullets: [
-          "Year-to-year weather shifts style and quality.",
-          "Extreme events (hail/frost/flood/wind) can damage grapes and reduce yield.",
-        ],
-      },
-    ],
+  quality_balance: {
+    id: "quality_balance",
+    category: "Quality",
+    title: "Balance",
+    definition: "The relationship among acidity, alcohol, tannin, sweetness, body, flavor intensity, and finish.",
+    bullets: ["No single component should dominate unpleasantly."],
   },
-
-  label_essentials: {
-    id: "label_essentials",
-    title: "Reading the Label (WSET L2)",
-    pillar: "academy",
-    read_time: "6–10 min",
-    term_ids: [
-      "gi_definition",
-      "eu_pdo_pgi",
-      "traditional_terms_examples",
-      "italy_classico_riserva",
-      "spain_aging_terms",
-      "cuvee_definition",
-      "old_vines_definition",
-    ],
-    sections: [
-      {
-        title: "Geographical Indications (GI)",
-        bullets: [
-          "Most wines have a GI; EU labels often show legal categories.",
-          "Non-EU countries also have GI systems but legal category may not appear on label.",
-        ],
-      },
-      {
-        title: "Traditional terms (examples)",
-        bullets: [
-          "France: AOC (PDO), Vin de Pays (PGI)",
-          "Italy: DOC/DOCG (PDO), IGT (PGI)",
-          "Spain: DO/DOCa (PDO), Vino de la Tierra (PGI)",
-          "Germany: Prädikatswein/Qualitätswein (PDO), Landwein (PGI)",
-        ],
-      },
-      {
-        title: "Common label words",
-        bullets: [
-          "Cuvée: selection/blend term; not legally controlled.",
-          "Old vines: not legally defined; often implies lower yields (not guaranteed).",
-          "Spain ageing terms: Joven → Crianza → Reserva → Gran Reserva.",
-        ],
-      },
-    ],
+  quality_finish: {
+    id: "quality_finish",
+    category: "Quality",
+    title: "Finish",
+    definition: "The length of pleasant flavor persistence after swallowing or spitting.",
+    bullets: ["Longer, clean finishes often indicate higher quality."],
   },
-
-  storage_service: {
-    id: "storage_service",
-    title: "Storage & Service (WSET L2)",
-    pillar: "academy",
-    read_time: "5–8 min",
-    term_ids: ["storage_cork_side", "storage_light_vibration", "service_red_temp", "service_ice_bucket", "service_temp_table"],
-    sections: [
-      {
-        title: "Storage basics",
-        bullets: [
-          "Cork bottles: store on side so cork stays moist.",
-          "Avoid strong light and vibration.",
-        ],
-      },
-      {
-        title: "Serving temperature basics",
-        bullets: [
-          "Many reds show best around 15–18°C.",
-          "Use ice+water in a bucket for faster chilling.",
-          "Match temperature to style: lighter wines → colder; fuller wines → warmer (within range).",
-        ],
-      },
-    ],
+  quality_intensity: {
+    id: "quality_intensity",
+    category: "Quality",
+    title: "Intensity",
+    definition: "The strength of aroma and flavor perception.",
+    bullets: ["Measured separately on nose and palate."],
+  },
+  quality_complexity: {
+    id: "quality_complexity",
+    category: "Quality",
+    title: "Complexity",
+    definition: "The range and layering of aromas and flavors in the wine.",
+    bullets: ["More distinct layers generally suggest higher quality."],
+  },
+  pairing_high_risk_foods: {
+    id: "pairing_high_risk_foods",
+    category: "Food Pairing",
+    title: "High-Risk Foods",
+    definition: "Foods that can make wines taste harsher, thinner, or less fruity.",
+    bullets: ["Sugar, umami, strong bitterness, and chili heat are common examples."],
+  },
+  pairing_sugar_rule: {
+    id: "pairing_sugar_rule",
+    category: "Food Pairing",
+    title: "Sugar Rule",
+    definition: "The wine should be at least as sweet as the dish.",
+    bullets: ["Otherwise the wine can taste sour or bitter."],
+  },
+  pairing_umami_effects: {
+    id: "pairing_umami_effects",
+    category: "Food Pairing",
+    title: "Umami Effects",
+    definition: "Umami can increase bitterness, astringency, and acidity while reducing fruit perception.",
+    bullets: ["Age, mushrooms, and cured products are common umami sources."],
+  },
+  pairing_acid_food_effects: {
+    id: "pairing_acid_food_effects",
+    category: "Food Pairing",
+    title: "Acid in Food",
+    definition: "Acidic food can make wine seem less acidic and more balanced.",
+    bullets: ["Pair high-acid foods with wines that have good acidity."],
+  },
+  pairing_salt_food_effects: {
+    id: "pairing_salt_food_effects",
+    category: "Food Pairing",
+    title: "Salt in Food",
+    definition: "Salt can soften bitterness and improve body and fruit perception in wine.",
+    bullets: ["Often makes difficult wines feel friendlier."],
+  },
+  pairing_bitterness_effects: {
+    id: "pairing_bitterness_effects",
+    category: "Food Pairing",
+    title: "Bitterness in Food",
+    definition: "Bitterness can accentuate bitterness and astringency in wine.",
+    bullets: ["Manage with fruit-forward wines and lower tannin when possible."],
+  },
+  pairing_chilli_heat: {
+    id: "pairing_chilli_heat",
+    category: "Food Pairing",
+    title: "Chili Heat",
+    definition: "Heat can amplify alcohol burn and reduce flavor clarity in wine.",
+    bullets: ["Lower alcohol, softer tannin, and slight sweetness usually work better."],
+  },
+  pairing_low_risk_foods: {
+    id: "pairing_low_risk_foods",
+    category: "Food Pairing",
+    title: "Low-Risk Foods",
+    definition: "Foods that are generally easier to pair with a broad range of wines.",
+    bullets: ["Salt and moderate acidity are commonly pairing-friendly."],
+  },
+  climate_categories: {
+    id: "climate_categories",
+    category: "Climate",
+    title: "Climate Categories",
+    definition: "Wine climates are often grouped as cool, moderate, and warm based on growing conditions.",
+    bullets: ["Category influences ripeness and final style."],
+  },
+  climate_hot_vs_cool: {
+    id: "climate_hot_vs_cool",
+    category: "Climate",
+    title: "Hot vs Cool Climates",
+    definition: "Warm sites usually give riper fruit and higher alcohol, cool sites preserve acidity and freshness.",
+    bullets: ["General pattern; local factors still matter."],
+  },
+  weather_vintage: {
+    id: "weather_vintage",
+    category: "Climate",
+    title: "Weather and Vintage",
+    definition: "Vintage variation reflects seasonal weather conditions during the growing year.",
+    bullets: ["Frost, hail, and rain can affect both yield and quality."],
+  },
+  gi_definition: {
+    id: "gi_definition",
+    category: "Label",
+    title: "Geographical Indication (GI)",
+    definition: "A legal link between a wine and a defined origin with production rules.",
+    bullets: ["Rules often include grapes, yields, and winemaking limits."],
+  },
+  eu_pdo_pgi: {
+    id: "eu_pdo_pgi",
+    category: "Label",
+    title: "PDO and PGI",
+    definition: "EU categories indicating protected origin and specification levels.",
+    bullets: ["PDO is typically more restrictive than PGI."],
+  },
+  traditional_terms_examples: {
+    id: "traditional_terms_examples",
+    category: "Label",
+    title: "Traditional Terms",
+    definition: "Country-specific legal naming systems tied to GI frameworks.",
+    bullets: ["Examples include AOC, DOCG, DO, and Pradikatswein."],
+  },
+  italy_classico_riserva: {
+    id: "italy_classico_riserva",
+    category: "Label",
+    title: "Classico and Riserva",
+    definition: "Common Italian terms for historic zone origin and extended aging requirements.",
+    bullets: ["Meanings can vary by appellation regulations."],
+  },
+  spain_aging_terms: {
+    id: "spain_aging_terms",
+    category: "Label",
+    title: "Spanish Aging Terms",
+    definition: "Terms like Crianza, Reserva, and Gran Reserva indicate minimum aging regimes.",
+    bullets: ["Requirements differ for red, white, and rose wines."],
+  },
+  cuvee_definition: {
+    id: "cuvee_definition",
+    category: "Label",
+    title: "Cuvee",
+    definition: "A producer term often used for a blend or special selection.",
+    bullets: ["Not universally controlled as a strict legal quality term."],
+  },
+  old_vines_definition: {
+    id: "old_vines_definition",
+    category: "Label",
+    title: "Old Vines",
+    definition: "A marketing and style indicator, often implying low-yield mature vines.",
+    bullets: ["Usually not a tightly regulated legal definition."],
+  },
+  storage_cork_side: {
+    id: "storage_cork_side",
+    category: "Service",
+    title: "Store Cork Bottles on Their Side",
+    definition: "Horizontal storage helps keep natural corks moist and sealed.",
+    bullets: ["Reduces risk of cork drying and oxygen ingress."],
+  },
+  storage_light_vibration: {
+    id: "storage_light_vibration",
+    category: "Service",
+    title: "Avoid Light and Vibration",
+    definition: "UV exposure and constant movement can degrade wine quality over time.",
+    bullets: ["Dark, stable environments are preferred."],
+  },
+  service_red_temp: {
+    id: "service_red_temp",
+    category: "Service",
+    title: "Red Wine Serving Temperature",
+    definition: "Many reds show best around cool cellar temperatures rather than room temperature.",
+    bullets: ["A practical range is often 15-18C depending on style."],
+  },
+  service_ice_bucket: {
+    id: "service_ice_bucket",
+    category: "Service",
+    title: "Ice Bucket Use",
+    definition: "Ice and water together chill wine faster and more evenly than ice alone.",
+    bullets: ["Short intervals with rechecks help avoid over-chilling."],
+  },
+  service_temp_table: {
+    id: "service_temp_table",
+    category: "Service",
+    title: "Style-Based Temperature",
+    definition: "Lighter wines are usually served cooler; fuller wines slightly warmer.",
+    bullets: ["Temperature should support aroma expression and balance."],
   },
 };

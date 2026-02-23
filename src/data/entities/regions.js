@@ -102,3 +102,24 @@ export const REGIONS_DATA = [
     ]
   }
 ];
+
+export const COUNTRIES = REGIONS_DATA.reduce((acc, country) => {
+  acc[country.id] = {
+    id: country.id,
+    name: country.name,
+    description: country.description,
+  };
+  return acc;
+}, {});
+
+export const REGIONS = REGIONS_DATA.reduce((acc, country) => {
+  for (const region of country.subRegions) {
+    acc[region.id] = {
+      id: region.id,
+      country_id: country.id,
+      name: region.name,
+      methods: region.methods,
+    };
+  }
+  return acc;
+}, {});
