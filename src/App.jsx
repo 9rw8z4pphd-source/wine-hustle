@@ -2,8 +2,8 @@
 import React, { useMemo, useState } from "react";
 import { COUNTRIES, REGIONS } from "./data/entities/regions";
 import { GRAPES } from "./data/entities/grapes";
-import { getWinesByRegion } from "./lib/selectors";
-import { getAllLessons, getLessonById, getTermsForLesson } from "./lib/academy";
+import { getWinesByRegion } from "./data/lib/selectors";
+import { getAllLessons, getLessonById, getTermsForLesson } from "./data/lib/academy";
 
 export default function App() {
   const [view, setView] = useState("home");
