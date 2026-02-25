@@ -3,6 +3,7 @@ import React, { useMemo, useState } from "react";
 import { COUNTRIES, REGIONS } from "./data/entities/regions";
 import { GRAPES } from "./data/entities/grapes";
 import { WINES } from "./data/entities/wines";
+import { TERMS } from "./data/entities/terms";
 import { getWinesByRegion } from "./data/lib/selectors";
 import { getAllLessons, getLessonById, getTermsForLesson } from "./data/lib/academy";
 
@@ -22,6 +23,7 @@ export default function App() {
   const allRegions = useMemo(() => Object.values(REGIONS), []);
   const allGrapes = useMemo(() => Object.values(GRAPES), []);
   const allWines = useMemo(() => Object.values(WINES), []);
+  const allTerms = useMemo(() => Object.values(TERMS), []);
 
   const wineCountByRegion = useMemo(
     () =>
@@ -45,6 +47,16 @@ export default function App() {
   const lessons = useMemo(() => getAllLessons(), []);
   const activeLesson = useMemo(() => (activeLessonId ? getLessonById(activeLessonId) : null), [activeLessonId]);
   const activeLessonTerms = useMemo(() => (activeLesson ? getTermsForLesson(activeLesson) : []), [activeLesson]);
+  const lessonByTermId = useMemo(
+    () =>
+      lessons.reduce((acc, lesson) => {
+        for (const termId of lesson.term_ids ?? []) {
+          if (!acc[termId]) acc[termId] = lesson.id;
+        }
+        return acc;
+      }, {}),
+    [lessons]
+  );
 
   const navigate = (newView, countryId = null, regionId = null, lessonId = null) => {
     setView(newView);
@@ -105,6 +117,7 @@ export default function App() {
         (r.methods ?? "").toLowerCase().includes(q) ||
         (r.climate ?? "").toLowerCase().includes(q) ||
         (r.soils ?? "").toLowerCase().includes(q) ||
+        (r.wset_label_focus ?? "").toLowerCase().includes(q) ||
         (r.key_grapes ?? []).join(" ").toLowerCase().includes(q) ||
         (r.flagship_styles ?? []).join(" ").toLowerCase().includes(q) ||
         r.id.toLowerCase().includes(q)
@@ -127,8 +140,24 @@ export default function App() {
       return hay.includes(q);
     });
 
-    return { countryHits, regionHits, grapeHits };
-  }, [searchQuery, allCountries, allGrapes]);
+    const lessonHits = lessons.filter((l) => {
+      const hay = [l.id, l.title, ...(l.sections ?? []).flatMap((s) => [s.title, ...(s.bullets ?? [])])]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+      return hay.includes(q);
+    });
+
+    const termHits = allTerms.filter((t) => {
+      const hay = [t.id, t.title, t.category, t.definition, ...(t.bullets ?? [])]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+      return hay.includes(q);
+    });
+
+    return { countryHits, regionHits, grapeHits, lessonHits, termHits };
+  }, [searchQuery, allCountries, allGrapes, lessons, allTerms]);
 
   const Card = ({ children, className = "" }) => (
     <div className={`bg-[#111] border border-white/5 rounded-[3rem] ${className}`}>{children}</div>
@@ -183,7 +212,7 @@ export default function App() {
         {searchResults && (
           <Card className="animate-fadeIn mb-16 p-10">
             <p className="text-[10px] font-black text-[#E2725B] uppercase tracking-[0.4em] mb-6">Search Results</p>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
               <div>
                 <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4">Countries</p>
                 <div className="space-y-3">
@@ -243,6 +272,42 @@ export default function App() {
                         <p className="text-[10px] uppercase tracking-widest text-slate-500 mt-1">Jump to DNA →</p>
                       </button>
                     ))
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4">Academy</p>
+                <div className="space-y-3">
+                  {searchResults.lessonHits.length === 0 && searchResults.termHits.length === 0 ? (
+                    <p className="text-xs text-slate-600 italic">No matches.</p>
+                  ) : (
+                    <>
+                      {searchResults.lessonHits.slice(0, 4).map((l) => (
+                        <button
+                          key={l.id}
+                          onClick={() => navigate("lesson", null, null, l.id)}
+                          className="block w-full text-left p-4 bg-white/[0.02] hover:bg-white/[0.05] border border-white/5 rounded-2xl transition-all"
+                        >
+                          <p className="text-sm font-bold">{l.title}</p>
+                          <p className="text-[10px] uppercase tracking-widest text-slate-500 mt-1">Open lesson →</p>
+                        </button>
+                      ))}
+                      {searchResults.termHits.slice(0, 4).map((t) => (
+                        <button
+                          key={t.id}
+                          onClick={() => {
+                            const lessonId = lessonByTermId[t.id];
+                            if (lessonId) navigate("lesson", null, null, lessonId);
+                            else navigate("academy");
+                          }}
+                          className="block w-full text-left p-4 bg-white/[0.02] hover:bg-white/[0.05] border border-white/5 rounded-2xl transition-all"
+                        >
+                          <p className="text-sm font-bold">{t.title}</p>
+                          <p className="text-[10px] uppercase tracking-widest text-slate-500 mt-1">{t.category} term →</p>
+                        </button>
+                      ))}
+                    </>
                   )}
                 </div>
               </div>
@@ -342,7 +407,7 @@ export default function App() {
                 <p className="text-2xl text-[#C6AC8F] italic font-serif leading-relaxed mb-6">"{activeRegion.methods}"</p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 max-w-5xl">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8 max-w-5xl">
                 {activeRegion.climate && (
                   <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-5">
                     <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-2">Climate</p>
@@ -359,6 +424,12 @@ export default function App() {
                   <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-5">
                     <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-2">Flagship Styles</p>
                     <p className="text-sm text-[#C6AC8F]">{activeRegion.flagship_styles.join(", ")}</p>
+                  </div>
+                )}
+                {activeRegion.wset_label_focus && (
+                  <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-5">
+                    <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-2">WSET Label Focus</p>
+                    <p className="text-sm text-[#C6AC8F]">{activeRegion.wset_label_focus}</p>
                   </div>
                 )}
               </div>

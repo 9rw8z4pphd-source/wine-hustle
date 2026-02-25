@@ -108,7 +108,8 @@ export const REGIONS_DATA = [
         climate: "Maritime with moderate rainfall.",
         soils: "Gravel, clay-limestone, and sandy alluvials.",
         key_grapes: ["cabernet-sauvignon", "merlot", "sauvignon-blanc"],
-        flagship_styles: ["Medoc blends", "Saint-Emilion Merlot blends", "Dry and sweet whites"]
+        flagship_styles: ["Medoc blends", "Saint-Emilion Merlot blends", "Dry and sweet whites"],
+        wset_label_focus: "Left Bank is generally Cabernet-led; Right Bank is generally Merlot-led."
       },
       {
         id: "burgundy",
@@ -117,7 +118,8 @@ export const REGIONS_DATA = [
         climate: "Continental with frost and hail pressure.",
         soils: "Limestone and marl by subregion and slope.",
         key_grapes: ["pinot-noir", "chardonnay", "aligote"],
-        flagship_styles: ["Cote de Nuits Pinot Noir", "Chablis", "Cote de Beaune Chardonnay"]
+        flagship_styles: ["Cote de Nuits Pinot Noir", "Chablis", "Cote de Beaune Chardonnay"],
+        wset_label_focus: "Hierarchy runs from regional to village, then Premier Cru and Grand Cru."
       },
       {
         id: "champagne",
@@ -135,7 +137,8 @@ export const REGIONS_DATA = [
         climate: "Continental north to Mediterranean south.",
         soils: "Granite, galets, sandy alluvials, and limestone.",
         key_grapes: ["syrah", "grenache", "viognier"],
-        flagship_styles: ["Cote-Rotie", "Hermitage", "Chateauneuf-du-Pape"]
+        flagship_styles: ["Cote-Rotie", "Hermitage", "Chateauneuf-du-Pape"],
+        wset_label_focus: "Cotes du Rhone < Villages < named crus such as Hermitage and Chateauneuf-du-Pape."
       },
       {
         id: "loire",
@@ -248,7 +251,8 @@ export const REGIONS_DATA = [
         climate: "Atlantic-influenced to continental by subzone.",
         soils: "Clay-limestone, alluvial, and iron-rich clays.",
         key_grapes: ["tempranillo", "garnacha", "graciano"],
-        flagship_styles: ["Crianza", "Reserva", "Gran Reserva"]
+        flagship_styles: ["Crianza", "Reserva", "Gran Reserva"],
+        wset_label_focus: "Aging terms (Joven, Crianza, Reserva, Gran Reserva) signal minimum maturation."
       },
       {
         id: "ribera",
@@ -438,7 +442,8 @@ export const REGIONS_DATA = [
         climate: "Cool continental with river moderation.",
         soils: "Blue and red slate.",
         key_grapes: ["riesling"],
-        flagship_styles: ["Kabinett", "Spatlese", "Feinherb and dry Riesling"]
+        flagship_styles: ["Kabinett", "Spatlese", "Feinherb and dry Riesling"],
+        wset_label_focus: "Pradikat categories map to grape ripeness levels and broad sweetness style."
       },
       {
         id: "rheingau",

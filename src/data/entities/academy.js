@@ -8,7 +8,18 @@ export const LESSONS = {
     title: "Tasting & Evaluating Wine (WSET L2)",
     pillar: "academy",
     read_time: "6–10 min",
-    term_ids: ["sat_intro", "appearance_out_of_condition", "quality_balance", "quality_finish", "quality_intensity", "quality_complexity"],
+    term_ids: [
+      "sat_intro",
+      "tasting_prep_environment",
+      "appearance_out_of_condition",
+      "faults_cork_taint_oxidation",
+      "wine_lexicon_groups",
+      "quality_balance",
+      "quality_finish",
+      "quality_intensity",
+      "quality_complexity",
+      "sat_quality_scale",
+    ],
     sections: [
       {
         title: "Why taste systematically?",
@@ -41,6 +52,7 @@ export const LESSONS = {
     pillar: "academy",
     read_time: "7–12 min",
     term_ids: [
+      "pairing_primary_interactions",
       "pairing_high_risk_foods",
       "pairing_sugar_rule",
       "pairing_umami_effects",
@@ -49,6 +61,7 @@ export const LESSONS = {
       "pairing_bitterness_effects",
       "pairing_chilli_heat",
       "pairing_low_risk_foods",
+      "pairing_high_risk_wines",
     ],
     sections: [
       {
@@ -75,7 +88,13 @@ export const LESSONS = {
     title: "Climate, Weather & Style (WSET L2)",
     pillar: "academy",
     read_time: "6–10 min",
-    term_ids: ["climate_categories", "climate_hot_vs_cool", "weather_vintage"],
+    term_ids: [
+      "climate_categories",
+      "climate_drivers_latitude_altitude_ocean",
+      "climate_hot_vs_cool",
+      "weather_vintage",
+      "water_sunlight_and_ripening",
+    ],
     sections: [
       {
         title: "What controls climate?",
@@ -110,9 +129,11 @@ export const LESSONS = {
     term_ids: [
       "gi_definition",
       "eu_pdo_pgi",
+      "eu_traditional_gi_terms",
       "traditional_terms_examples",
       "italy_classico_riserva",
       "spain_aging_terms",
+      "spain_aging_hierarchy_detail",
       "cuvee_definition",
       "old_vines_definition",
     ],
@@ -149,7 +170,17 @@ export const LESSONS = {
     title: "Storage & Service (WSET L2)",
     pillar: "academy",
     read_time: "5–8 min",
-    term_ids: ["storage_cork_side", "storage_light_vibration", "service_red_temp", "service_ice_bucket", "service_temp_table"],
+    term_ids: [
+      "storage_cork_side",
+      "storage_light_vibration",
+      "service_red_temp",
+      "service_ice_bucket",
+      "service_temp_table",
+      "service_temperature_bands",
+      "sparkling_opening_safety",
+      "decanting_principles",
+      "opened_wine_preservation",
+    ],
     sections: [
       {
         title: "Storage basics",
@@ -164,6 +195,45 @@ export const LESSONS = {
           "Many reds show best around 15–18°C.",
           "Use ice+water in a bucket for faster chilling.",
           "Match temperature to style: lighter wines → colder; fuller wines → warmer (within range).",
+        ],
+      },
+      {
+        title: "Service operations",
+        bullets: [
+          "Open sparkling carefully: hold cork, turn bottle, release pressure quietly.",
+          "Decant old wines for sediment; decant selected young wines for controlled aeration.",
+          "Recork and chill opened wine to slow oxidation; preservation tools extend life further.",
+        ],
+      },
+    ],
+  },
+
+  core_grape_profiles_wset_l2: {
+    id: "core_grape_profiles_wset_l2",
+    title: "Core Grape Profiles (WSET L2)",
+    pillar: "academy",
+    read_time: "8–14 min",
+    term_ids: [
+      "grape_profile_chardonnay",
+      "grape_profile_pinot_noir",
+      "grape_profile_cabernet_merlot",
+      "grape_profile_sauvignon_blanc",
+      "grape_profile_syrah_grenache",
+      "grape_profile_riesling",
+    ],
+    sections: [
+      {
+        title: "Why this module matters",
+        bullets: [
+          "These six profiles map to the main WSET Level 2 grape chapters and exam-style style expectations.",
+          "Use climate + structure + aroma clues together rather than relying on one marker.",
+        ],
+      },
+      {
+        title: "Profile method",
+        bullets: [
+          "For each variety, remember climate fit, structural profile, common winemaking choices, and aging behavior.",
+          "Compare two wines side-by-side to anchor differences in acid, tannin, and fruit spectrum.",
         ],
       },
     ],

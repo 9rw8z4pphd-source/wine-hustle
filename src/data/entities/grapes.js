@@ -45,7 +45,9 @@ export const GRAPES = {
       parentage: "Ancient variety; parent to Chardonnay and Gamay",
       soil_affinity: "Limestone and marl",
       clones: "Dijon 115/667/777, Pommard, Mt. Eden",
-      phenolics: "Thin skins, lower tannin, high aromatic detail."
+      phenolics: "Thin skins, lower tannin, high aromatic detail.",
+      climate_fit: "Most successful in cool to moderate climates.",
+      wset_style_core: "Delicate structure with red-fruit and savory expression; oak use must stay restrained."
     },
     summary: "Transparent grape that mirrors site and farming choices.",
     description: "Pinot Noir performs best in cool to moderate climates and punishes excess heat, overcropping, and careless extraction.",
@@ -63,7 +65,9 @@ export const GRAPES = {
       parentage: "Cabernet Franc x Sauvignon Blanc",
       soil_affinity: "Gravel, well-drained alluvial benches",
       clones: "337, 191, 15",
-      phenolics: "Small berries with thick skins and high tannin load."
+      phenolics: "Small berries with thick skins and high tannin load.",
+      climate_fit: "Needs moderate to warm conditions for full ripeness.",
+      wset_style_core: "Black fruit, high tannin/acid structure, often oak-aged for longevity."
     },
     summary: "Backbone grape for structured, ageworthy reds.",
     description: "Late budding and ripening with strong disease resistance; excels where sunlight allows full tannin ripeness.",
@@ -81,7 +85,8 @@ export const GRAPES = {
       parentage: "Magdeleine Noire des Charentes x Cabernet Franc",
       soil_affinity: "Clay and cool moisture-retentive sites",
       clones: "181, 343, 348",
-      phenolics: "Softer tannin architecture than Cabernet Sauvignon."
+      phenolics: "Softer tannin architecture than Cabernet Sauvignon.",
+      wset_style_core: "Generally less aromatic and less tannic than Cabernet Sauvignon, often fuller in body."
     },
     summary: "Plush texture grape that rounds blends and can stand alone.",
     description: "Merlot ripens earlier than Cabernet Sauvignon and can offer plush fruit without sacrificing ageability in top terroirs.",
@@ -99,7 +104,9 @@ export const GRAPES = {
       parentage: "Dureza x Mondeuse Blanche",
       soil_affinity: "Granite, schist, and iron-rich clays",
       clones: "174, 470, 877",
-      phenolics: "High color density and robust tannin with spicy phenolics."
+      phenolics: "High color density and robust tannin with spicy phenolics.",
+      climate_fit: "Moderate to warm sites; struggles in cool climates.",
+      wset_style_core: "Moderate climates show pepper/meat notes; warmer sites show sweeter spice and riper fruit."
     },
     summary: "Dark-fruited red with savory spice and structure.",
     description: "Syrah thrives in sunny but not excessive heat, preserving pepper and floral notes when nights remain cool.",
@@ -117,7 +124,9 @@ export const GRAPES = {
       parentage: "Ancient Iberian variety",
       soil_affinity: "Stoney galets, schist, and dry sandy soils",
       clones: "ENTAV-INRA 136, 362",
-      phenolics: "Moderate color, low tannin, high sugar accumulation."
+      phenolics: "Moderate color, low tannin, high sugar accumulation.",
+      climate_fit: "Requires warm to hot climates for full ripeness.",
+      wset_style_core: "Red-fruit and spice profile, high alcohol potential, often blended for structure."
     },
     summary: "Warm-climate specialist that brings ripeness and perfume.",
     description: "Grenache is drought tolerant and often blended with Syrah and Mourvedre for balance and complexity.",
@@ -153,7 +162,9 @@ export const GRAPES = {
       parentage: "Pinot x Gouais Blanc",
       soil_affinity: "Limestone, chalk, and clay-limestone",
       clones: "95, 96, 548, Mendoza",
-      phenolics: "Neutral aromatic base that transmits site and cellar decisions."
+      phenolics: "Neutral aromatic base that transmits site and cellar decisions.",
+      climate_fit: "Performs across cool, moderate, and warm regions with large style variation.",
+      wset_style_core: "Not strongly aromatic; style is heavily shaped by MLF, lees, and oak handling."
     },
     summary: "Global benchmark white for terroir and winemaking expression.",
     description: "Chardonnay ranges from linear, mineral styles to richer oak-influenced wines depending on climate and elevage.",
@@ -171,7 +182,9 @@ export const GRAPES = {
       parentage: "Ancient western French variety",
       soil_affinity: "Silex, limestone, and free-draining gravels",
       clones: "1-Davis, 376, 530",
-      phenolics: "High thiol potential for pungent citrus and herbal notes."
+      phenolics: "High thiol potential for pungent citrus and herbal notes.",
+      climate_fit: "Best in cool to moderate climates to preserve aromatic precision.",
+      wset_style_core: "Typically high acid and dry; most styles are unoaked and best consumed young."
     },
     summary: "Aromatic white built on high acidity and freshness.",
     description: "Sauvignon Blanc can be sharply mineral or intensely tropical depending on climate and harvest timing.",
@@ -189,7 +202,9 @@ export const GRAPES = {
       parentage: "Heunisch x wild vine lineage",
       soil_affinity: "Slate, quartzite, and limestone",
       clones: "239 Gm, 110, 198",
-      phenolics: "Very high natural acidity and strong aromatic precursor load."
+      phenolics: "Very high natural acidity and strong aromatic precursor load.",
+      climate_fit: "Thrives in cool to moderate climates with long ripening seasons.",
+      wset_style_core: "Can produce dry to lusciously sweet wines and ages with honeyed, toasty complexity."
     },
     summary: "Precision grape with unmatched acid spine and longevity.",
     description: "Riesling communicates site with clarity and can produce dry to lusciously sweet styles with excellent ageability.",
