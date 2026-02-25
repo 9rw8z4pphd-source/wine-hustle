@@ -2,6 +2,7 @@
 import React, { useMemo, useState } from "react";
 import { COUNTRIES, REGIONS } from "./data/entities/regions";
 import { GRAPES } from "./data/entities/grapes";
+import { WINES } from "./data/entities/wines";
 import { getWinesByRegion } from "./data/lib/selectors";
 import { getAllLessons, getLessonById, getTermsForLesson } from "./data/lib/academy";
 
@@ -18,7 +19,18 @@ export default function App() {
   const activeRegion = activeRegionId ? REGIONS[activeRegionId] : null;
 
   const allCountries = useMemo(() => Object.values(COUNTRIES), []);
+  const allRegions = useMemo(() => Object.values(REGIONS), []);
   const allGrapes = useMemo(() => Object.values(GRAPES), []);
+  const allWines = useMemo(() => Object.values(WINES), []);
+
+  const wineCountByRegion = useMemo(
+    () =>
+      allWines.reduce((acc, wine) => {
+        acc[wine.region_id] = (acc[wine.region_id] ?? 0) + 1;
+        return acc;
+      }, {}),
+    [allWines]
+  );
 
   const activeCountryRegions = useMemo(() => {
     if (!activeCountryId) return [];
@@ -55,6 +67,14 @@ export default function App() {
     }
   };
 
+  const getGrapeLabel = (grapeId) => {
+    if (GRAPES[grapeId]?.name) return GRAPES[grapeId].name;
+    return grapeId
+      .replaceAll("-", " ")
+      .replaceAll("_", " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+  };
+
   const PowerBar = ({ label, level }) => (
     <div className="mb-6">
       <div className="flex justify-between text-[10px] uppercase font-black tracking-widest mb-2 text-slate-500">
@@ -80,7 +100,14 @@ export default function App() {
     );
 
     const regionHits = Object.values(REGIONS).filter(
-      (r) => r.name.toLowerCase().includes(q) || (r.methods ?? "").toLowerCase().includes(q) || r.id.toLowerCase().includes(q)
+      (r) =>
+        r.name.toLowerCase().includes(q) ||
+        (r.methods ?? "").toLowerCase().includes(q) ||
+        (r.climate ?? "").toLowerCase().includes(q) ||
+        (r.soils ?? "").toLowerCase().includes(q) ||
+        (r.key_grapes ?? []).join(" ").toLowerCase().includes(q) ||
+        (r.flagship_styles ?? []).join(" ").toLowerCase().includes(q) ||
+        r.id.toLowerCase().includes(q)
     );
 
     const grapeHits = allGrapes.filter((g) => {
@@ -233,6 +260,25 @@ export default function App() {
               </p>
             </div>
 
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+              <Card className="p-6">
+                <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-2">Countries</p>
+                <p className="text-3xl font-bold text-[#E2725B]">{allCountries.length}</p>
+              </Card>
+              <Card className="p-6">
+                <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-2">Regions</p>
+                <p className="text-3xl font-bold text-[#E2725B]">{allRegions.length}</p>
+              </Card>
+              <Card className="p-6">
+                <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-2">Grapes</p>
+                <p className="text-3xl font-bold text-[#E2725B]">{allGrapes.length}</p>
+              </Card>
+              <Card className="p-6">
+                <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-2">Wines</p>
+                <p className="text-3xl font-bold text-[#E2725B]">{allWines.length}</p>
+              </Card>
+            </div>
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               {allCountries.map((country) => (
                 <div
@@ -266,6 +312,15 @@ export default function App() {
                   className="p-10 bg-[#111] rounded-[3rem] border border-white/5 hover:bg-[#161616] cursor-pointer transition-all border-b-4 border-b-[#E2725B]/20"
                 >
                   <h4 className="text-2xl font-bold mb-4">{reg.name}</h4>
+                  {reg.climate && <p className="text-sm text-[#A9927D] mb-3">{reg.climate}</p>}
+                  {!!reg.key_grapes?.length && (
+                    <p className="text-[10px] uppercase tracking-widest text-slate-500 mb-4">
+                      Key grapes: {reg.key_grapes.slice(0, 3).map((g) => getGrapeLabel(g)).join(" • ")}
+                    </p>
+                  )}
+                  <p className="text-[10px] uppercase tracking-widest text-slate-600 mb-5">
+                    {wineCountByRegion[reg.id] ?? 0} mapped wine styles
+                  </p>
                   <p className="text-xs text-slate-500 uppercase tracking-widest">Access Tech Specs →</p>
                 </div>
               ))}
@@ -286,6 +341,49 @@ export default function App() {
               <div className="max-w-3xl">
                 <p className="text-2xl text-[#C6AC8F] italic font-serif leading-relaxed mb-6">"{activeRegion.methods}"</p>
               </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 max-w-5xl">
+                {activeRegion.climate && (
+                  <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-5">
+                    <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-2">Climate</p>
+                    <p className="text-sm text-[#C6AC8F]">{activeRegion.climate}</p>
+                  </div>
+                )}
+                {activeRegion.soils && (
+                  <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-5">
+                    <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-2">Soils</p>
+                    <p className="text-sm text-[#C6AC8F]">{activeRegion.soils}</p>
+                  </div>
+                )}
+                {!!activeRegion.flagship_styles?.length && (
+                  <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-5">
+                    <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-2">Flagship Styles</p>
+                    <p className="text-sm text-[#C6AC8F]">{activeRegion.flagship_styles.join(", ")}</p>
+                  </div>
+                )}
+              </div>
+
+              {!!activeRegion.key_grapes?.length && (
+                <div className="mt-6 flex flex-wrap gap-3 max-w-5xl">
+                  {activeRegion.key_grapes.map((grapeId) => {
+                    const grape = GRAPES[grapeId];
+                    const label = getGrapeLabel(grapeId);
+                    return (
+                      <button
+                        key={grapeId}
+                        onClick={() => grape && handleGrapeClick(grape.name)}
+                        className={`px-4 py-2 bg-white/5 border border-white/10 rounded-full font-mono text-[10px] uppercase tracking-widest transition-all ${
+                          grape
+                            ? "text-[#E2725B] hover:bg-[#E2725B] hover:text-white"
+                            : "text-[#C6AC8F] cursor-default"
+                        }`}
+                      >
+                        {label}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </header>
 
             <div className="grid grid-cols-1 gap-20">
@@ -301,6 +399,19 @@ export default function App() {
                     <div className="lg:col-span-7">
                       <span className="text-[10px] font-black text-slate-600 mb-4 block uppercase tracking-widest">Entry {String(i + 1).padStart(3, "0")}</span>
                       <h3 className="text-6xl font-bold mb-6">{wine.name}</h3>
+
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {wine.classification && (
+                          <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-[#C6AC8F]">
+                            {wine.classification}
+                          </span>
+                        )}
+                        {wine.style_profile && (
+                          <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-[#C6AC8F]">
+                            {wine.style_profile}
+                          </span>
+                        )}
+                      </div>
 
                       <div className="flex flex-wrap gap-3 mb-8">
                         {(wine.grape_ids ?? []).map((gid) => {
